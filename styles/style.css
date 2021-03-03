@@ -1,0 +1,77 @@
+*,
+*::before,
+*::after {
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    width: 1280px;
+    height: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    padding: 20px;
+}
+
+.header__ul {
+    list-style-type: none;
+}
+
+.header__li {
+    color: darkred;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.game__table {
+    border-spacing: 0;
+    background-repeat: no-repeat;
+}
+
+.game__table__td {
+    width: 64px;
+    height: 64px;
+}
+
+.game__table__td--ground {
+    background-image: url("../assets/ground_06.png");
+}
+
+.game__table__td--box {
+    background-image: url("../assets/crate_11.png");
+}
+
+.game__table__td--brown-box {
+    background-image: url("../assets/crate_42.png");
+    background-repeat: no-repeat;
+}
+
+.game__table__td--environment {
+    background-image: url("../assets/environment_10.png"), url("../assets/ground_06.png");
+}
+
+.game__table__td--player-default {
+    background-image: url("../assets/player_23.png"), url("../assets/ground_06.png");;
+}
+
+.game__table__td--player-left {
+    background-image: url("../assets/player_22.png"), url("../assets/ground_06.png");
+}
+
+.game__table__td--player-right {
+    background-image: url("../assets/player_19.png"), url("../assets/ground_06.png");
+}
+
+.game__table__td--player-down {
+    background-image: url("../assets/player_24.png"), url("../assets/ground_06.png");
+}
+
+.game__table__td--player-up {
+    background-image: url("../assets/player_24.png"), url("../assets/ground_06.png");
+}

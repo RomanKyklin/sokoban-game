@@ -5,9 +5,75 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/style.css">
     <title>Sokoban game</title>
 </head>
 <body>
+<div class="main">
+    <header class="header">
+        <nav class="header__nav">
+            <ul class="header__ul">
+                <li class="header__li start-new-game">Начать заново</li>
+            </ul>
+        </nav>
+    </header>
 
+    <section class="game">
+        <table class="game__table">
+            <tr class="game__table__tr">
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+            </tr>
+            <tr class="game__table__tr">
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--ground"></td>
+                <td class="game__table__td game__table__td--ground"></td>
+                <td id="start-game-block"
+                    class="game__table__td game__table__td--ground game__table__td--player game__table__td--player-default">
+                </td>
+                <td class="game__table__td game__table__td--ground"></td>
+                <td class="game__table__td game__table__td--box"></td>
+            </tr>
+            <tr class="game__table__tr">
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--brown-box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+            </tr>
+            <tr class="game__table__tr">
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--ground"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td"></td>
+                <td class="game__table__td"></td>
+                <td class="game__table__td"></td>
+            </tr>
+            <tr class="game__table__tr">
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--environment"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td"></td>
+                <td class="game__table__td"></td>
+                <td class="game__table__td"></td>
+            </tr>
+            <tr class="game__table__tr">
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td game__table__td--box"></td>
+                <td class="game__table__td"></td>
+                <td class="game__table__td"></td>
+                <td class="game__table__td"></td>
+            </tr>
+        </table>
+    </section>
+</div>
+
+<script src="src/index.js"></script>
 </body>
 </html>
