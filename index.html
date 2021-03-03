@@ -9,71 +9,8 @@
     <title>Sokoban game</title>
 </head>
 <body>
-<div class="main">
-    <header class="header">
-        <nav class="header__nav">
-            <ul class="header__ul">
-                <li class="header__li start-new-game">Начать заново</li>
-            </ul>
-        </nav>
-    </header>
+<div id="root"></div>
 
-    <section class="game">
-        <table class="game__table">
-            <tr class="game__table__tr">
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-            </tr>
-            <tr class="game__table__tr">
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--ground"></td>
-                <td class="game__table__td game__table__td--ground"></td>
-                <td id="start-game-block"
-                    class="game__table__td game__table__td--ground game__table__td--player game__table__td--player-default">
-                </td>
-                <td class="game__table__td game__table__td--ground"></td>
-                <td class="game__table__td game__table__td--box"></td>
-            </tr>
-            <tr class="game__table__tr">
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--brown-box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-            </tr>
-            <tr class="game__table__tr">
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--ground"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td"></td>
-                <td class="game__table__td"></td>
-                <td class="game__table__td"></td>
-            </tr>
-            <tr class="game__table__tr">
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--environment"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td"></td>
-                <td class="game__table__td"></td>
-                <td class="game__table__td"></td>
-            </tr>
-            <tr class="game__table__tr">
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td game__table__td--box"></td>
-                <td class="game__table__td"></td>
-                <td class="game__table__td"></td>
-                <td class="game__table__td"></td>
-            </tr>
-        </table>
-    </section>
-</div>
-
-<script src="src/index.js"></script>
+<script src="./src/index.js" type="module"></script>
 </body>
 </html>

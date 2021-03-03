@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="84cbfb48-872d-4a9d-96fa-7ecf825ab763" name="Default Changelist" comment="" />
+    <list default="true" id="84cbfb48-872d-4a9d-96fa-7ecf825ab763" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/classes/game-engine.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/game-renderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1pEzyJBq8okn3impTNbrXp6EX47" />
   <component name="ProjectViewState">
@@ -42,21 +69,33 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614763290181</updated>
-      <workItem from="1614763291208" duration="7379000" />
+      <workItem from="1614763291208" duration="8083000" />
+      <workItem from="1614789615860" duration="3476000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="459" y="538" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614763582976">
       <screen x="0" y="25" width="2560" height="1415" />
     </state>
     <state x="459" y="538" key="#com.intellij.fileTypes.FileTypeChooser/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1614763582976" />
-    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup" timestamp="1614769766237">
+    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup" timestamp="1614790192050">
       <screen x="0" y="25" width="2560" height="1415" />
     </state>
-    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1614769766237" />
+    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1614790192050" />
   </component>
 </project>
