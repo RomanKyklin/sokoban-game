@@ -8,8 +8,8 @@ export class GameEngine {
     GAME_HTML_SELECTORS = {
         playerIdentificationClass: 'game__table__td--player',
         playerDefaultCssClass: ['game__table__td--player', 'game__table__td--player-default'],
-        playerLeftDirectionCssClass: ['game__table__td--player-left', 'game__table__td--player-default'],
-        playerRightDirectionCssClass: ['game__table__td--player-right', 'game__table__td--player-default'],
+        playerLeftDirectionCssClass: ['game__table__td--player', 'game__table__td--player-left'],
+        playerRightDirectionCssClass: ['game__table__td--player', 'game__table__td--player-right'],
         groundCssClass: 'game__table__td--ground',
         greenGroundClass: 'game__table__td--green-ground',
         brownBoxCssClass: 'game__table__td--brown-box',
@@ -39,7 +39,11 @@ export class GameEngine {
     }
 
     changePlayerPosition(currentElement, newElement) {
-        currentElement.classList.remove(...this.currentPlayerDirectionClass);
+        document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.playerIdentificationClass}`).forEach(val => {
+            val.classList.remove(...this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+            val.classList.remove(...this.GAME_HTML_SELECTORS.playerRightDirectionCssClass);
+            val.classList.remove(...this.GAME_HTML_SELECTORS.playerLeftDirectionCssClass);
+        })
         newElement.classList.add(...this.currentPlayerDirectionClass);
     }
 
@@ -153,23 +157,23 @@ export class GameEngine {
     movementListeners() {
         document.addEventListener('keydown', $e => {
             const {key} = $e;
-            let playerElement = document.querySelector(`.${this.GAME_HTML_SELECTORS.playerIdentificationClass}`);
+            let playerElement = document.querySelector(`.${this.currentPlayerDirectionClass}`);
 
             switch (key) {
                 case this.KEYBOARD_KEYS.leftArrowKey:
-                    // this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerLeftDirectionCssClass);
+                    this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerLeftDirectionCssClass);
                     this.rightLeftArrowActions(playerElement, playerElement.previousElementSibling);
                     return;
                 case this.KEYBOARD_KEYS.rightArrowKey:
-                    // this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerRightDirectionCssClass);
+                    this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerRightDirectionCssClass);
                     this.rightLeftArrowActions(playerElement, playerElement.nextElementSibling);
                     return;
                 case this.KEYBOARD_KEYS.upArrowKey:
-                    // this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+                    this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerDefaultCssClass);
                     this.topArrowAction(playerElement);
                     return;
                 case this.KEYBOARD_KEYS.downArrowKey:
-                    // this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+                    this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerDefaultCssClass);
                     this.bottomArrowAction(playerElement);
                     return;
                 default:
