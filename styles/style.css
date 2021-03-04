@@ -43,13 +43,16 @@
     background-image: url("../assets/ground_06.png");
 }
 
+.game__table__td--green-ground {
+    background-image: url("../assets/ground_05.png");
+}
+
 .game__table__td--box {
     background-image: url("../assets/crate_11.png");
 }
 
 .game__table__td--brown-box {
     background-image: url("../assets/crate_42.png");
-    background-repeat: no-repeat;
 }
 
 .game__table__td--environment {

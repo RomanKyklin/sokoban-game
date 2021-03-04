@@ -27,7 +27,7 @@ export class GameRenderer {
                             <td class="game__table__td game__table__td--box"></td>
                             <td class="game__table__td game__table__td--ground"></td>
                             <td class="game__table__td game__table__td--ground"></td>
-                            <td id="start-game-block"
+                            <td id="default-player-place"
                                 class="game__table__td game__table__td--ground game__table__td--player game__table__td--player-default">
                             </td>
                             <td class="game__table__td game__table__td--ground"></td>
@@ -35,7 +35,7 @@ export class GameRenderer {
                         </tr>
                         <tr class="game__table__tr">
                             <td class="game__table__td game__table__td--box"></td>
-                            <td class="game__table__td game__table__td--brown-box"></td>
+                            <td id="default-brown-box-place" class="game__table__td game__table__td--brown-box"></td>
                             <td class="game__table__td game__table__td--box"></td>
                             <td class="game__table__td game__table__td--box"></td>
                             <td class="game__table__td game__table__td--box"></td>
@@ -51,7 +51,7 @@ export class GameRenderer {
                         </tr>
                         <tr class="game__table__tr">
                             <td class="game__table__td game__table__td--box"></td>
-                            <td class="game__table__td game__table__td--environment"></td>
+                            <td id="default-environment-place" class="game__table__td game__table__td--environment"></td>
                             <td class="game__table__td game__table__td--box"></td>
                             <td class="game__table__td"></td>
                             <td class="game__table__td"></td>

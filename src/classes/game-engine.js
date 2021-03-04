@@ -2,14 +2,22 @@ export class GameEngine {
     constructor() {
     }
 
+    WIN_MESSAGE_TIMEOUT = 1000;
+    WIN_MESSAGE_TEXT = 'Вы выйграли!';
+
     GAME_HTML_SELECTORS = {
         playerIdentificationClass: 'game__table__td--player',
         playerDefaultCssClass: ['game__table__td--player', 'game__table__td--player-default'],
+        playerLeftDirectionCssClass: ['game__table__td--player-left', 'game__table__td--player-default'],
+        playerRightDirectionCssClass: ['game__table__td--player-right', 'game__table__td--player-default'],
         groundCssClass: 'game__table__td--ground',
+        greenGroundClass: 'game__table__td--green-ground',
         brownBoxCssClass: 'game__table__td--brown-box',
         environmentCssClass: 'game__table__td--environment',
         newGameBtnClass: 'start-new-game',
-        startGameBlockID: 'start-game-block',
+        startGameBlockID: 'default-player-place',
+        defaultBrownBoxPlaceID: 'default-brown-box-place',
+        defaultEnvironmentPlaceID: 'default-environment-place'
     };
 
     KEYBOARD_KEYS = {
@@ -19,25 +27,56 @@ export class GameEngine {
         downArrowKey: 'ArrowDown'
     }
 
+    currentPlayerDirectionClass = this.GAME_HTML_SELECTORS.playerDefaultCssClass;
+
+    changePlayerDirection(newDirectionClass) {
+        this.currentPlayerDirectionClass = newDirectionClass;
+    }
+
     startNewGameListener() {
         document.querySelector(`.${this.GAME_HTML_SELECTORS.newGameBtnClass}`)
-            .addEventListener('click', () => {
-                document.querySelectorAll(this.GAME_HTML_SELECTORS.groundCssClass).forEach(node => {
-                    node.classList.remove(...this.GAME_HTML_SELECTORS.playerDefaultCssClass);
-                });
-                document.querySelector(`#${this.GAME_HTML_SELECTORS.startGameBlockID}`).classList.add(
-                    ...this.GAME_HTML_SELECTORS.playerDefaultCssClass
-                );
-            })
+            .addEventListener('click', this.startNewGame.bind(this))
     }
 
     changePlayerPosition(currentElement, newElement) {
-        currentElement.classList.remove(...this.GAME_HTML_SELECTORS.playerDefaultCssClass);
-        newElement.classList.add(...this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+        currentElement.classList.remove(...this.currentPlayerDirectionClass);
+        newElement.classList.add(...this.currentPlayerDirectionClass);
     }
 
-    isGroundElement(element) {
-        return element && element.classList.contains(this.GAME_HTML_SELECTORS.groundCssClass)
+    changeBoxPosition(currentElement, newElement) {
+        currentElement.classList.remove(this.GAME_HTML_SELECTORS.brownBoxCssClass);
+        currentElement.classList.add(this.GAME_HTML_SELECTORS.groundCssClass);
+        if (newElement.classList.contains(this.GAME_HTML_SELECTORS.groundCssClass)) {
+            newElement.classList.remove(this.GAME_HTML_SELECTORS.groundCssClass);
+        }
+        newElement.classList.add(this.GAME_HTML_SELECTORS.brownBoxCssClass);
+    }
+
+    changeBrownBoxToGreenGroundPosition(currentElement, newElement) {
+        currentElement.classList.remove(this.GAME_HTML_SELECTORS.brownBoxCssClass);
+        currentElement.classList.add(this.GAME_HTML_SELECTORS.groundCssClass);
+        newElement.classList.remove(this.GAME_HTML_SELECTORS.environmentCssClass);
+        newElement.classList.add(this.GAME_HTML_SELECTORS.greenGroundClass);
+    }
+
+    isGroundElement(htmlElement) {
+        return htmlElement && htmlElement.classList.contains(this.GAME_HTML_SELECTORS.groundCssClass);
+    }
+
+    isBrownBoxElement(htmlElement) {
+        return htmlElement && htmlElement.classList.contains(this.GAME_HTML_SELECTORS.brownBoxCssClass);
+    }
+
+    isEnvironmentElement(htmlElement) {
+        return htmlElement && htmlElement.classList.contains(this.GAME_HTML_SELECTORS.environmentCssClass);
+    }
+
+    isEnvironmentElementComesAfterBrownBox(newElement) {
+        return this.isEnvironmentElement(this.getTopOrBottomNewElement(
+            newElement,
+            newElement?.parentElement || null,
+            newElement?.parentElement?.nextElementSibling || null
+        ))
     }
 
     hasChildNodes(element) {
@@ -66,23 +105,48 @@ export class GameEngine {
         return foundElement || null;
     }
 
-    rightLeftArrowActions(sibling, playerElement) {
-        if (this.isGroundElement(sibling)) {
-            this.changePlayerPosition(playerElement, sibling);
-        }
+    rightLeftArrowActions(playerElement, sibling) {
+        this.movementActions(playerElement, sibling);
     }
 
-    topBottomArrowActions(playerElement) {
-        const parentElement = playerElement.parentElement;
-        const topParentSibling = parentElement ? parentElement.previousElementSibling : null;
-        const elementKey = this.getChildElementKey(parentElement, playerElement);
+    topArrowAction(playerElement) {
+        const parentElement = playerElement?.parentElement || null;
+        const topParentSibling = parentElement?.previousElementSibling || null;
+        const topNewElement = this.getTopOrBottomNewElement(playerElement, parentElement, topParentSibling);
+        topNewElement ? this.movementActions(playerElement, topNewElement) : null;
+    }
 
-        if (this.hasChildNodes(topParentSibling)) {
-            const topElement = this.getChildElementByKey(parentElement, elementKey);
+    bottomArrowAction(playerElement) {
+        const parentElement = playerElement?.parentElement || null;
+        const bottomParentSibling = parentElement?.nextElementSibling || null;
+        const bottomNewElement = this.getTopOrBottomNewElement(playerElement, parentElement, bottomParentSibling);
+        bottomNewElement ? this.movementActions(playerElement, bottomNewElement) : null;
+    }
 
-            if (this.isGroundElement(topElement)) {
-                this.changePlayerPosition(playerElement, topElement)
-            }
+    getTopOrBottomNewElement(currentElement, parentElement, parentSibling) {
+        const elementKey = this.getChildElementKey(parentElement, currentElement);
+
+        if (this.hasChildNodes(parentSibling)) {
+            return this.getChildElementByKey(parentSibling, elementKey);
+        }
+        return null;
+    }
+
+    movementActions(playerElement, newElement) {
+        const bottomNewElement = this.getTopOrBottomNewElement(
+            newElement,
+            newElement?.parentElement || null,
+            newElement?.parentElement?.nextElementSibling || null
+        );
+        if (this.isGroundElement(newElement)) {
+            this.changePlayerPosition(playerElement, newElement);
+        } else if (this.isBrownBoxElement(newElement) && !this.isEnvironmentElementComesAfterBrownBox(newElement)) {
+            this.changePlayerPosition(playerElement, newElement);
+            this.changeBoxPosition(newElement, bottomNewElement);
+        } else if (this.isBrownBoxElement(newElement) && this.isEnvironmentElementComesAfterBrownBox(newElement)) {
+            this.changePlayerPosition(playerElement, newElement);
+            this.changeBrownBoxToGreenGroundPosition(newElement, bottomNewElement);
+            this.win();
         }
     }
 
@@ -93,21 +157,75 @@ export class GameEngine {
 
             switch (key) {
                 case this.KEYBOARD_KEYS.leftArrowKey:
-                    this.rightLeftArrowActions(playerElement.previousElementSibling, playerElement);
+                    // this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerLeftDirectionCssClass);
+                    this.rightLeftArrowActions(playerElement, playerElement.previousElementSibling);
                     return;
                 case this.KEYBOARD_KEYS.rightArrowKey:
-                    this.rightLeftArrowActions(playerElement.nextElementSibling, playerElement);
+                    // this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerRightDirectionCssClass);
+                    this.rightLeftArrowActions(playerElement, playerElement.nextElementSibling);
                     return;
                 case this.KEYBOARD_KEYS.upArrowKey:
-                    this.topBottomArrowActions(playerElement);
+                    // this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+                    this.topArrowAction(playerElement);
                     return;
                 case this.KEYBOARD_KEYS.downArrowKey:
-                    this.topBottomArrowActions(playerElement);
+                    // this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+                    this.bottomArrowAction(playerElement);
                     return;
                 default:
                     return;
             }
         })
+    }
+
+    setBrownBoxToDefaultPosition() {
+        document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.brownBoxCssClass}`).forEach(node => {
+            node.classList.remove(this.GAME_HTML_SELECTORS.brownBoxCssClass);
+        });
+
+        const defaultBrownBoxElement = document.querySelector(`#${this.GAME_HTML_SELECTORS.defaultBrownBoxPlaceID}`);
+
+        if (defaultBrownBoxElement.classList.contains(this.GAME_HTML_SELECTORS.groundCssClass)) {
+            defaultBrownBoxElement.classList.remove(this.GAME_HTML_SELECTORS.groundCssClass);
+        }
+
+        defaultBrownBoxElement.classList.add(this.GAME_HTML_SELECTORS.brownBoxCssClass);
+    }
+
+    setPlayerToDefaultPosition() {
+        document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.playerIdentificationClass}`).forEach(node => {
+            node.classList.remove(...this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+        });
+        document.querySelector(`#${this.GAME_HTML_SELECTORS.startGameBlockID}`).classList.add(
+            ...this.GAME_HTML_SELECTORS.playerDefaultCssClass
+        );
+
+    }
+
+    setEnvironmentToDefaultPosition() {
+        document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.greenGroundClass}`).forEach(node => {
+            node.classList.remove(this.GAME_HTML_SELECTORS.greenGroundClass);
+        });
+        document.querySelector(`#${this.GAME_HTML_SELECTORS.defaultEnvironmentPlaceID}`).classList.add(
+            this.GAME_HTML_SELECTORS.environmentCssClass
+        );
+    }
+
+    startNewGame() {
+        this.setPlayerToDefaultPosition();
+        this.setBrownBoxToDefaultPosition();
+        this.setEnvironmentToDefaultPosition();
+    }
+
+    showWinMessage() {
+        alert(this.WIN_MESSAGE_TEXT);
+    }
+
+    win() {
+        setTimeout(() => {
+            this.showWinMessage();
+            this.startNewGame();
+        }, this.WIN_MESSAGE_TIMEOUT);
     }
 
     run() {
