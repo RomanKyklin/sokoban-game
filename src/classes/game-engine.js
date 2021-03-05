@@ -10,6 +10,7 @@ export class GameEngine {
         playerDefaultCssClass: ['game__table__td--player', 'game__table__td--player-default'],
         playerLeftDirectionCssClass: ['game__table__td--player', 'game__table__td--player-left'],
         playerRightDirectionCssClass: ['game__table__td--player', 'game__table__td--player-right'],
+        playerTopDirectionCssClass: ['game__table__td--player', 'game__table__td--player-top'],
         groundCssClass: 'game__table__td--ground',
         greenGroundClass: 'game__table__td--green-ground',
         brownBoxCssClass: 'game__table__td--brown-box',
@@ -38,12 +39,16 @@ export class GameEngine {
             .addEventListener('click', this.startNewGame.bind(this))
     }
 
+    removePlayerClasses(node) {
+        node.classList.remove(...this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+        node.classList.remove(...this.GAME_HTML_SELECTORS.playerRightDirectionCssClass);
+        node.classList.remove(...this.GAME_HTML_SELECTORS.playerLeftDirectionCssClass);
+        node.classList.remove(...this.GAME_HTML_SELECTORS.playerTopDirectionCssClass);
+    }
+
     changePlayerPosition(currentElement, newElement) {
-        document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.playerIdentificationClass}`).forEach(val => {
-            val.classList.remove(...this.GAME_HTML_SELECTORS.playerDefaultCssClass);
-            val.classList.remove(...this.GAME_HTML_SELECTORS.playerRightDirectionCssClass);
-            val.classList.remove(...this.GAME_HTML_SELECTORS.playerLeftDirectionCssClass);
-        })
+        document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.playerIdentificationClass}`)
+            .forEach(node => this.removePlayerClasses(node))
         newElement.classList.add(...this.currentPlayerDirectionClass);
     }
 
@@ -169,7 +174,7 @@ export class GameEngine {
                     this.rightLeftArrowActions(playerElement, playerElement.nextElementSibling);
                     return;
                 case this.KEYBOARD_KEYS.upArrowKey:
-                    this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+                    this.changePlayerDirection(this.GAME_HTML_SELECTORS.playerTopDirectionCssClass);
                     this.topArrowAction(playerElement);
                     return;
                 case this.KEYBOARD_KEYS.downArrowKey:
@@ -185,6 +190,10 @@ export class GameEngine {
     setBrownBoxToDefaultPosition() {
         document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.brownBoxCssClass}`).forEach(node => {
             node.classList.remove(this.GAME_HTML_SELECTORS.brownBoxCssClass);
+
+            if (!node.classList.contains(this.GAME_HTML_SELECTORS.groundCssClass)) {
+                node.classList.add(this.GAME_HTML_SELECTORS.groundCssClass);
+            }
         });
 
         const defaultBrownBoxElement = document.querySelector(`#${this.GAME_HTML_SELECTORS.defaultBrownBoxPlaceID}`);
@@ -198,7 +207,7 @@ export class GameEngine {
 
     setPlayerToDefaultPosition() {
         document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.playerIdentificationClass}`).forEach(node => {
-            node.classList.remove(...this.GAME_HTML_SELECTORS.playerDefaultCssClass);
+            this.removePlayerClasses(node);
         });
         document.querySelector(`#${this.GAME_HTML_SELECTORS.startGameBlockID}`).classList.add(
             ...this.GAME_HTML_SELECTORS.playerDefaultCssClass

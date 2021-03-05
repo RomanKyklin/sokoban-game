@@ -71,10 +71,6 @@
     background-image: url("../assets/player_19.png"), url("../assets/ground_06.png");
 }
 
-.game__table__td--player-down {
-    background-image: url("../assets/player_24.png"), url("../assets/ground_06.png");
-}
-
-.game__table__td--player-up {
-    background-image: url("../assets/player_24.png"), url("../assets/ground_06.png");
+.game__table__td--player-top {
+    background-image: url("../assets/player_08.png"), url("../assets/ground_06.png");
 }
