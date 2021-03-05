@@ -18,7 +18,8 @@ export class GameEngine {
         newGameBtnClass: 'start-new-game',
         startGameBlockID: 'default-player-place',
         defaultBrownBoxPlaceID: 'default-brown-box-place',
-        defaultEnvironmentPlaceID: 'default-environment-place'
+        defaultEnvironmentPlaceID: 'default-environment-place',
+        saturateClass: 'saturate'
     };
 
     KEYBOARD_KEYS = {
@@ -50,6 +51,16 @@ export class GameEngine {
         document.querySelectorAll(`.${this.GAME_HTML_SELECTORS.playerIdentificationClass}`)
             .forEach(node => this.removePlayerClasses(node))
         newElement.classList.add(...this.currentPlayerDirectionClass);
+    }
+
+    saturateElement(htmlElement) {
+        htmlElement.classList.add(this.GAME_HTML_SELECTORS.saturateClass);
+    }
+
+    unSaturateElement(htmlElement) {
+        if (htmlElement.classList.contains(this.GAME_HTML_SELECTORS.saturateClass)) {
+            htmlElement.classList.remove(this.GAME_HTML_SELECTORS.saturateClass);
+        }
     }
 
     changeBoxPosition(currentElement, newElement) {
@@ -147,7 +158,12 @@ export class GameEngine {
             newElement?.parentElement || null,
             newElement?.parentElement?.nextElementSibling || null
         );
+        this.unSaturateElement(playerElement);
+
         if (this.isGroundElement(newElement)) {
+            this.changePlayerPosition(playerElement, newElement);
+        } else if (this.isEnvironmentElement(newElement)) {
+            this.saturateElement(newElement);
             this.changePlayerPosition(playerElement, newElement);
         } else if (this.isBrownBoxElement(newElement) && !this.isEnvironmentElementComesAfterBrownBox(newElement)) {
             this.changePlayerPosition(playerElement, newElement);

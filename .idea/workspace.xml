@@ -20,9 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84cbfb48-872d-4a9d-96fa-7ecf825ab763" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/player_08.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/game-engine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/game-engine.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/game-renderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/game-renderer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +70,8 @@
       <updated>1614763290181</updated>
       <workItem from="1614763291208" duration="8083000" />
       <workItem from="1614789615860" duration="15267000" />
-      <workItem from="1614886564427" duration="883000" />
+      <workItem from="1614886564427" duration="1156000" />
+      <workItem from="1614934669015" duration="1106000" />
     </task>
     <task id="LOCAL-00001" summary="* code refactored">
       <created>1614799072800</created>
@@ -93,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614855279747</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="* fixed bug&#10;* added top played direction">
+      <created>1614932562171</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1614932562171</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,7 +123,8 @@
     <MESSAGE value="* code refactored" />
     <MESSAGE value="* improved game engine  &#10;* working on player direction" />
     <MESSAGE value="* added player direction" />
-    <option name="LAST_COMMIT_MESSAGE" value="* added player direction" />
+    <MESSAGE value="* fixed bug&#10;* added top played direction" />
+    <option name="LAST_COMMIT_MESSAGE" value="* fixed bug&#10;* added top played direction" />
   </component>
   <component name="WindowStateProjectService">
     <state x="459" y="538" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614763582976">

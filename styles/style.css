@@ -74,3 +74,7 @@
 .game__table__td--player-top {
     background-image: url("../assets/player_08.png"), url("../assets/ground_06.png");
 }
+
+.saturate {
+    filter: saturate(5);
+}
