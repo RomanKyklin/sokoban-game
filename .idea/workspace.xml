@@ -20,10 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84cbfb48-872d-4a9d-96fa-7ecf825ab763" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/box.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/brown-box.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/environment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/ground.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/player.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/box.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/brown-box.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/environment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/ground.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/player.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/event-loop.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/observer/observer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/renderers/generic-renderer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/renderers/image-table-renderer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/game-engine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/game-engine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/game-renderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/game-renderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/game-renderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/renderers/bg-table-renderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +55,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/classes/cells/image-table-cells" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/classes/cells/image-table-cells" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/classes/renderers" />
       <recent name="$PROJECT_DIR$/assets" />
     </key>
   </component>
@@ -71,7 +89,9 @@
       <workItem from="1614763291208" duration="8083000" />
       <workItem from="1614789615860" duration="15267000" />
       <workItem from="1614886564427" duration="1156000" />
-      <workItem from="1614934669015" duration="1106000" />
+      <workItem from="1614934669015" duration="1899000" />
+      <workItem from="1615022993783" duration="1403000" />
+      <workItem from="1615046167231" duration="12335000" />
     </task>
     <task id="LOCAL-00001" summary="* code refactored">
       <created>1614799072800</created>
@@ -101,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614932562171</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="* added different player view when player move to the environment">
+      <created>1614935913156</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614935913156</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +151,8 @@
     <MESSAGE value="* improved game engine  &#10;* working on player direction" />
     <MESSAGE value="* added player direction" />
     <MESSAGE value="* fixed bug&#10;* added top played direction" />
-    <option name="LAST_COMMIT_MESSAGE" value="* fixed bug&#10;* added top played direction" />
+    <MESSAGE value="* added different player view when player move to the environment" />
+    <option name="LAST_COMMIT_MESSAGE" value="* added different player view when player move to the environment" />
   </component>
   <component name="WindowStateProjectService">
     <state x="459" y="538" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614763582976">
@@ -135,9 +163,9 @@
       <screen x="0" y="25" width="2560" height="1415" />
     </state>
     <state x="390" y="345" key="run.anything.popup/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1614844824035" />
-    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup" timestamp="1614847190442">
+    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup" timestamp="1615049628417">
       <screen x="0" y="25" width="2560" height="1415" />
     </state>
-    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1614847190442" />
+    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1615049628417" />
   </component>
 </project>
