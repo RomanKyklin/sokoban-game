@@ -1,7 +1,3 @@
-import Box from "./cells/bg-table-cells/box.js";
-import {BrownBox} from "./cells/bg-table-cells/brown-box.js";
-import {Environment} from "./cells/bg-table-cells/environment.js";
-
 export class GameEngine {
     constructor(gameRenderer) {
         this.gameRenderer = gameRenderer;
@@ -17,58 +13,92 @@ export class GameEngine {
         downArrowKey: 'ArrowDown'
     }
 
-    isBox(element) {
-        return element instanceof Box;
+    playerMeetBrownBox(
+        elementFromPlayer,
+        playerDirectionFn,
+        getElementFromFn,
+    ) {
+        const {element, rowIndex, cellIndex} = this.gameRenderer.getElementFullData(elementFromPlayer);
+        const fromBrownBoxElement = getElementFromFn(rowIndex, cellIndex);
+
+        if (this.gameRenderer.isGround(fromBrownBoxElement)) {
+            this.gameRenderer.changePositions(fromBrownBoxElement, elementFromPlayer);
+            playerDirectionFn();
+        } else if (this.gameRenderer.isEnvironmentBox(fromBrownBoxElement)) {
+            this.gameRenderer.changePositions(elementFromPlayer, fromBrownBoxElement);
+            playerDirectionFn();
+            this.gameRenderer.saturateBox(elementFromPlayer);
+            this.gameRenderer.changeElementToGround(fromBrownBoxElement);
+        }
     }
 
-    isBrownBox(element) {
-        return element instanceof BrownBox;
-    }
-
-    isEnvironmentBox(element) {
-        return element instanceof Environment;
+    playerMeetEnvironment(environmentElement, playerDirectionFn) {
+        playerDirectionFn();
+        this.gameRenderer.saturatePlayer();
+        this.gameRenderer.changeElementToGround(environmentElement);
     }
 
     rightAction() {
-        const rightElement = this.gameRenderer.getRightElementFromThePlayer();
-
-        if (!this.isBox(rightElement) && !this.isBrownBox(rightElement)) {
-            this.gameRenderer.playerToRight();
-        } else if (!this.isBox(rightElement) && this.isBrownBox(rightElement)) {
-
-
-        } else if (this.isEnvironmentBox(rightElement)) {
-            this.gameRenderer.playerToRight();
-            this.gameRenderer.saturatePlayer();
-        } else {
-            this.gameRenderer.unSaturatePlayer();
-        }
+        this.gameActions(
+            this.gameRenderer.getRightElementFromThePlayer(),
+            this.gameRenderer.playerToRight.bind(this.gameRenderer),
+            this.gameRenderer.getRightElementFrom.bind(this.gameRenderer)
+        );
     }
 
     leftAction() {
-        const leftElement = this.gameRenderer.getLeftElementFromThePlayer();
-
-        if (!this.isBox(leftElement) && !this.isBrownBox(leftElement)) {
-            this.gameRenderer.playerToLeft();
-        }
+        this.gameActions(
+            this.gameRenderer.getLeftElementFromThePlayer(),
+            this.gameRenderer.playerToLeft.bind(this.gameRenderer),
+            this.gameRenderer.getLeftElementFrom.bind(this.gameRenderer)
+        );
     }
 
     upAction() {
-        const topElement = this.gameRenderer.getTopElementFromThePlayer();
-
-        if (!this.isBox(topElement) && !this.isBrownBox(topElement)) {
-            this.gameRenderer.playerToTop();
-        }
+        this.gameActions(
+            this.gameRenderer.getTopElementFromThePlayer(),
+            this.gameRenderer.playerToTop.bind(this.gameRenderer),
+            this.gameRenderer.getTopElementFrom.bind(this.gameRenderer)
+        );
     }
 
     bottomAction() {
-        const bottomElement = this.gameRenderer.getBottomElementFromThePlayer();
+        this.gameActions(
+            this.gameRenderer.getBottomElementFromThePlayer(),
+            this.gameRenderer.playerToBottom.bind(this.gameRenderer),
+            this.gameRenderer.getBottomElementFrom.bind(this.gameRenderer)
+        );
+    }
 
-        if (!this.isBox(bottomElement) && !this.isBrownBox(bottomElement)) {
-            this.gameRenderer.playerToTop();
+    gameActions(
+        nextElement,
+        playerDirectionFn,
+        getElementFromFn
+    ) {
+        if (this.gameRenderer.isPlayerSaturated() && !this.gameRenderer.isBox(nextElement)) {
+            this.gameRenderer.unSaturatePlayerActions(this.gameRenderer.getCurrentEnvironmentPosition());
         }
 
-        this.gameRenderer.playerToBottom();
+        if (this.gameRenderer.isGround(nextElement)) {
+            playerDirectionFn();
+        } else if (this.gameRenderer.isBrownBox(nextElement)) {
+            this.playerMeetBrownBox(
+                nextElement,
+                playerDirectionFn,
+                getElementFromFn
+            );
+        } else if (this.gameRenderer.isEnvironmentBox(nextElement)) {
+            this.playerMeetEnvironment(
+                nextElement,
+                playerDirectionFn
+            );
+        } else if (this.gameRenderer.isSaturatedBox(nextElement)) {
+            this.playerMeetBrownBox(
+                this.gameRenderer.unSaturateBoxAndReturnNewElement(nextElement),
+                playerDirectionFn,
+                getElementFromFn
+            )
+        }
     }
 
     movementListeners() {
@@ -94,8 +124,13 @@ export class GameEngine {
         })
     }
 
+    startNewGameListener() {
+        const newGameBtn = this.gameRenderer.getNewGameBtn();
+        newGameBtn.addEventListener('click', () => this.startNewGame());
+    }
+
     startNewGame() {
-        this.gameRenderer.render();
+        this.gameRenderer.restartLevel();
     }
 
     showWinMessage() {
@@ -108,6 +143,7 @@ export class GameEngine {
     }
 
     run() {
+        this.startNewGameListener();
         this.movementListeners();
     }
 }
