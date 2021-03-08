@@ -3,8 +3,10 @@ export class GameEngine {
         this.gameRenderer = gameRenderer;
     }
 
-    WIN_MESSAGE_TIMEOUT = 1000;
+    WIN_MESSAGE_TIMEOUT = 0;
     WIN_MESSAGE_TEXT = 'Вы выйграли!';
+    NEXT_LEVEL_MESSAGE = 'Хотите перейти на следующий уровень ?';
+    DO_NOT_HAVE_NEXT_LEVEL_MESSAGE = 'Следующий уровень отсутствует! Вы прошли финальный уровень.'
 
     KEYBOARD_KEYS = {
         leftArrowKey: 'ArrowLeft',
@@ -29,6 +31,7 @@ export class GameEngine {
             playerDirectionFn();
             this.gameRenderer.saturateBox(elementFromPlayer);
             this.gameRenderer.changeElementToGround(fromBrownBoxElement);
+            this.win();
         }
     }
 
@@ -138,8 +141,17 @@ export class GameEngine {
     }
 
     win() {
-        this.showWinMessage();
-        this.startNewGame();
+        setTimeout(() => {
+            this.showWinMessage();
+            const isStartNextLevel = confirm(this.NEXT_LEVEL_MESSAGE);
+            if (this.gameRenderer.hasNextLevel() && isStartNextLevel) {
+                this.gameRenderer.renderNextLevel();
+                return;
+            } else if (!this.gameRenderer.hasNextLevel() && isStartNextLevel) {
+                alert(this.DO_NOT_HAVE_NEXT_LEVEL_MESSAGE);
+            }
+            this.startNewGame();
+        }, this.WIN_MESSAGE_TIMEOUT)
     }
 
     run() {

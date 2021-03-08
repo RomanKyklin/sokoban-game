@@ -1,5 +1,11 @@
+import CellTypes from "../cell-types.js";
+
 export class Ground {
     constructor() {
+    }
+
+    getType() {
+        return CellTypes.GROUND_TYPE;
     }
 
     getHtml() {

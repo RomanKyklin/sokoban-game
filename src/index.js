@@ -1,5 +1,6 @@
 import {GameEngine} from "./classes/game-engine.js";
 import {BgTableRenderer} from "./classes/renderers/bg-table-renderer.js";
+import {ImageTableRenderer} from "./classes/renderers/image-table-renderer.js";
 
 (function game(document) {
     const gameRenderer = new BgTableRenderer('#root');

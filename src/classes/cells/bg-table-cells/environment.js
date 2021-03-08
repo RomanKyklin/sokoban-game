@@ -1,5 +1,11 @@
+import CellTypes from "../cell-types.js";
+
 export class Environment {
     constructor() {
+    }
+
+    getType() {
+        return CellTypes.ENVIRONMENT_TYPE;
     }
 
     getHtml() {

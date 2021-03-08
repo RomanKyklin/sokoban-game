@@ -1,5 +1,11 @@
+import CellTypes from "../cell-types.js";
+
 export class BrownBox {
     constructor() {
+    }
+
+    getType() {
+        return CellTypes.BROWN_BOX_TYPE;
     }
 
     getHtml() {

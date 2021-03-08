@@ -9,6 +9,6 @@ export class SaturatedPlayer {
     }
 
     getHtml() {
-        return '<td id="default-player-place" class="game__table__td game__table__td--ground game__table__td--player game__table__td--player-default saturate"></td>';
+        return '<td><img src="./assets/player_23.png" class="saturate"></td>';
     }
 }

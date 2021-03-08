@@ -5,16 +5,21 @@ import {BrownBox} from "../cells/bg-table-cells/brown-box.js";
 import {Environment} from "../cells/bg-table-cells/environment.js";
 import {SaturatedBox} from "../cells/bg-table-cells/saturated-box.js";
 import {SaturatedPlayer} from "../cells/bg-table-cells/saturated-player.js";
+import CellTypes from "../cells/cell-types.js";
 
 export class BgTableRenderer {
     constructor(rootElementSelector) {
         this.rootElementSelector = rootElementSelector;
+        this.initializeDefaultData();
+    }
+
+    initializeDefaultData() {
         this.levels = [
             this.getFirstLevelStructure(),
             this.getSecondLevelStructure()
         ];
-        this.currentLevelIndex = 1;
-        this.currentLevelStructure = this.getSecondLevelStructure();
+        this.currentLevelIndex = 0;
+        this.currentLevelStructure = this.getFirstLevelStructure();
         this.startNewGameBtnId = 'start-new-game';
         this.previousPlayerPosition = null;
         this.currentEnvironmentPosition = null;
@@ -132,29 +137,28 @@ export class BgTableRenderer {
     }
 
     isBox(element) {
-        return element instanceof Box;
+        return element.getType() === CellTypes.BOX_TYPE;
     }
 
     isBrownBox(element) {
-        return element instanceof BrownBox;
+        return element.getType() === CellTypes.BROWN_BOX_TYPE;
     }
 
     isEnvironmentBox(element) {
-        return element instanceof Environment;
+        return element.getType() === CellTypes.ENVIRONMENT_TYPE;
     }
 
     isGround(element) {
-        return element instanceof Ground;
+        return element.getType() === CellTypes.GROUND_TYPE;
     }
 
     isSaturatedBox(element) {
-        return element instanceof SaturatedBox;
+        return element.getType() === CellTypes.SATURATED_BOX_TYPE;
     }
 
     isPlayerSaturated() {
         const {player} = this.getCurrentPlayerData();
-
-        return player instanceof SaturatedPlayer;
+        return player.getType() === CellTypes.SATURATED_PLAYER_TYPE;
     }
 
     getCurrentLevelStructure() {
@@ -162,13 +166,12 @@ export class BgTableRenderer {
     }
 
     restartLevel() {
-        console.log('restart');
         this.currentLevelStructure = this.getCurrentLevelStructure();
         this.render();
     }
 
     hasNextLevel() {
-        return this.levels[this.currentLevelIndex + 1];
+        return this.levels[this.currentLevelIndex + 1] !== undefined;
     }
 
     getNextLevel() {
@@ -206,10 +209,12 @@ export class BgTableRenderer {
         let playerRowIndex;
         let playerCellIndex;
         let player;
+        let playerType;
 
         this.currentLevelStructure.forEach((val, index) => {
             if (val.find((val, index) => {
-                if (val instanceof Player || val instanceof SaturatedPlayer) {
+                playerType = val.getType();
+                if (playerType === CellTypes.PLAYER_TYPE || playerType === CellTypes.SATURATED_PLAYER_TYPE) {
                     playerCellIndex = index;
                     player = val;
                     return true;
@@ -373,10 +378,10 @@ export class BgTableRenderer {
                 <section class="game">
                     <table class="game__table">
                     ${this.currentLevelStructure.map(val => {
-                            return `<tr class="game__table__tr">
-                                                                    ${val.map(val => val.getHtml()).join('')}
-                                                                </tr>`
-                        }).join('')}
+            return `<tr class="game__table__tr">
+                                                              ${val.map(val => val.getHtml()).join('')}
+                                        </tr>`
+        }).join('')}
                     </table>
                 </section>
         </div>`

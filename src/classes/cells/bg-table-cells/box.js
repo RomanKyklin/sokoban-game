@@ -1,5 +1,11 @@
+import CellTypes from "../cell-types.js";
+
 export default class Box {
     constructor() {
+    }
+
+    getType() {
+        return CellTypes.BOX_TYPE;
     }
 
     getHtml() {
