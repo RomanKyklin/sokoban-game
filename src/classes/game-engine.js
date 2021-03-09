@@ -17,6 +17,12 @@ export class GameEngine {
         downArrowKey: 'ArrowDown'
     }
 
+    environments = [];
+
+    refreshEnvironmentsToWin() {
+        this.environments = [];
+    }
+
     isBox(element) {
         return element.getType() === CellTypes.BOX_TYPE;
     }
@@ -58,8 +64,34 @@ export class GameEngine {
             playerDirectionFn();
             this.gameRenderer.saturateBox(elementFromPlayer);
             this.gameRenderer.changeElementToGround(fromBrownBoxElement);
-            this.win();
+            this.boxMeetEnvironment(fromBrownBoxElement);
         }
+    }
+
+    boxMeetEnvironment(environment) {
+        this.environments.push(environment);
+
+        if (this.environments.length === this.getEnvironmentsToWin().length) {
+            this.win()
+        }
+    }
+
+    boxLeaveEnvironment(environment) {
+        if (!this.environments.includes(environment)) {
+            throw new Error('environments array doesnt have this specific environment object')
+        }
+        this.environments = this.environments.filter(val => val !== environment);
+    }
+
+    getEnvironmentsToWin() {
+        const gameStructure = this.gameRenderer.getCurrentLevelStructure();
+        const environments = [];
+        gameStructure.forEach(row => {
+            row.forEach(cell => {
+                if (this.isEnvironmentBox(cell)) environments.push(cell);
+            })
+        })
+        return environments;
     }
 
     playerMeetEnvironment(environmentElement, playerDirectionFn) {
@@ -170,6 +202,7 @@ export class GameEngine {
     win() {
         setTimeout(() => {
             this.showWinMessage();
+            this.refreshEnvironmentsToWin();
             const isStartNextLevel = confirm(this.NEXT_LEVEL_MESSAGE);
             if (this.gameRenderer.hasNextLevel() && isStartNextLevel) {
                 this.gameRenderer.renderNextLevel();

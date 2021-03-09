@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84cbfb48-872d-4a9d-96fa-7ecf825ab763" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/game-engine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/game-engine.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +75,7 @@
       <workItem from="1614934669015" duration="1899000" />
       <workItem from="1615022993783" duration="1403000" />
       <workItem from="1615046167231" duration="12335000" />
-      <workItem from="1615133723812" duration="5302000" />
+      <workItem from="1615133723812" duration="6003000" />
     </task>
     <task id="LOCAL-00001" summary="* code refactored">
       <created>1614799072800</created>
@@ -126,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615232999268</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="* moved check types function to game-engine">
+      <created>1615286535257</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1615286535257</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,7 +159,8 @@
     <MESSAGE value="* added different player view when player move to the environment" />
     <MESSAGE value="* code refactoring" />
     <MESSAGE value="* code refactored&#10;* cell types added" />
-    <option name="LAST_COMMIT_MESSAGE" value="* code refactored&#10;* cell types added" />
+    <MESSAGE value="* moved check types function to game-engine" />
+    <option name="LAST_COMMIT_MESSAGE" value="* moved check types function to game-engine" />
   </component>
   <component name="WindowStateProjectService">
     <state x="459" y="538" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614763582976">
@@ -167,9 +175,9 @@
       <screen x="0" y="25" width="2560" height="1415" />
     </state>
     <state x="390" y="345" key="run.anything.popup/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1614844824035" />
-    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup" timestamp="1615110040542">
+    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup" timestamp="1615286728961">
       <screen x="0" y="25" width="2560" height="1415" />
     </state>
-    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1615110040542" />
+    <state x="390" y="349" width="670" height="676" key="search.everywhere.popup/2560.25.2560.1415/0.25.2560.1415@0.25.2560.1415" timestamp="1615286728961" />
   </component>
 </project>
