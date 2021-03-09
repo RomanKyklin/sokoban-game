@@ -10,13 +10,6 @@ export class GameEngine {
     NEXT_LEVEL_MESSAGE = 'Хотите перейти на следующий уровень ?';
     DO_NOT_HAVE_NEXT_LEVEL_MESSAGE = 'Следующий уровень отсутствует! Вы прошли финальный уровень.'
 
-    KEYBOARD_KEYS = {
-        leftArrowKey: 'ArrowLeft',
-        rightArrowKey: 'ArrowRight',
-        upArrowKey: 'ArrowUp',
-        downArrowKey: 'ArrowDown'
-    }
-
     environments = [];
 
     refreshEnvironmentsToWin() {
@@ -163,29 +156,6 @@ export class GameEngine {
         }
     }
 
-    movementListeners() {
-        document.addEventListener('keydown', $e => {
-            const {key} = $e;
-
-            switch (key) {
-                case this.KEYBOARD_KEYS.leftArrowKey:
-                    this.leftAction();
-                    return;
-                case this.KEYBOARD_KEYS.rightArrowKey:
-                    this.rightAction();
-                    return;
-                case this.KEYBOARD_KEYS.upArrowKey:
-                    this.upAction();
-                    return;
-                case this.KEYBOARD_KEYS.downArrowKey:
-                    this.bottomAction();
-                    return;
-                default:
-                    return;
-            }
-        })
-    }
-
     startNewGameListener() {
         const newGameBtn = this.gameRenderer.getNewGameBtn();
         newGameBtn.addEventListener('click', () => this.startNewGame());
@@ -216,6 +186,5 @@ export class GameEngine {
 
     run() {
         this.startNewGameListener();
-        this.movementListeners();
     }
 }
