@@ -1,3 +1,5 @@
+import CellTypes from "./cells/cell-types.js";
+
 export class GameEngine {
     constructor(gameRenderer) {
         this.gameRenderer = gameRenderer;
@@ -15,6 +17,31 @@ export class GameEngine {
         downArrowKey: 'ArrowDown'
     }
 
+    isBox(element) {
+        return element.getType() === CellTypes.BOX_TYPE;
+    }
+
+    isBrownBox(element) {
+        return element.getType() === CellTypes.BROWN_BOX_TYPE;
+    }
+
+    isEnvironmentBox(element) {
+        return element.getType() === CellTypes.ENVIRONMENT_TYPE;
+    }
+
+    isGround(element) {
+        return element.getType() === CellTypes.GROUND_TYPE;
+    }
+
+    isSaturatedBox(element) {
+        return element.getType() === CellTypes.SATURATED_BOX_TYPE;
+    }
+
+    isPlayerSaturated() {
+        const {player} = this.gameRenderer.getCurrentPlayerData();
+        return player.getType() === CellTypes.SATURATED_PLAYER_TYPE;
+    }
+
     playerMeetBrownBox(
         elementFromPlayer,
         playerDirectionFn,
@@ -23,10 +50,10 @@ export class GameEngine {
         const {element, rowIndex, cellIndex} = this.gameRenderer.getElementFullData(elementFromPlayer);
         const fromBrownBoxElement = getElementFromFn(rowIndex, cellIndex);
 
-        if (this.gameRenderer.isGround(fromBrownBoxElement)) {
+        if (this.isGround(fromBrownBoxElement)) {
             this.gameRenderer.changePositions(fromBrownBoxElement, elementFromPlayer);
             playerDirectionFn();
-        } else if (this.gameRenderer.isEnvironmentBox(fromBrownBoxElement)) {
+        } else if (this.isEnvironmentBox(fromBrownBoxElement)) {
             this.gameRenderer.changePositions(elementFromPlayer, fromBrownBoxElement);
             playerDirectionFn();
             this.gameRenderer.saturateBox(elementFromPlayer);
@@ -78,24 +105,24 @@ export class GameEngine {
         playerDirectionFn,
         getElementFromFn
     ) {
-        if (this.gameRenderer.isPlayerSaturated() && !this.gameRenderer.isBox(nextElement)) {
+        if (this.isPlayerSaturated() && !this.isBox(nextElement)) {
             this.gameRenderer.unSaturatePlayerActions(this.gameRenderer.getCurrentEnvironmentPosition());
         }
 
-        if (this.gameRenderer.isGround(nextElement)) {
+        if (this.isGround(nextElement)) {
             playerDirectionFn();
-        } else if (this.gameRenderer.isBrownBox(nextElement)) {
+        } else if (this.isBrownBox(nextElement)) {
             this.playerMeetBrownBox(
                 nextElement,
                 playerDirectionFn,
                 getElementFromFn
             );
-        } else if (this.gameRenderer.isEnvironmentBox(nextElement)) {
+        } else if (this.isEnvironmentBox(nextElement)) {
             this.playerMeetEnvironment(
                 nextElement,
                 playerDirectionFn
             );
-        } else if (this.gameRenderer.isSaturatedBox(nextElement)) {
+        } else if (this.isSaturatedBox(nextElement)) {
             this.playerMeetBrownBox(
                 this.gameRenderer.unSaturateBoxAndReturnNewElement(nextElement),
                 playerDirectionFn,

@@ -20,27 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84cbfb48-872d-4a9d-96fa-7ecf825ab763" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/classes/cells/cell-types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/saturated-box.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/saturated-player.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/box.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/box.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/brown-box.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/brown-box.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/environment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/environment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/ground.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/ground.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/player.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/saturated-box.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/saturated-box.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/saturated-player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/bg-table-cells/saturated-player.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/image-table-cells/box.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/box.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/image-table-cells/brown-box.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/brown-box.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/image-table-cells/environment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/environment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/image-table-cells/ground.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/ground.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/cells/image-table-cells/player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/cells/image-table-cells/player.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/game-engine.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/game-engine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/renderers/bg-table-renderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/renderers/bg-table-renderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/renderers/generic-renderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/renderers/generic-renderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/renderers/image-table-renderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/renderers/image-table-renderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +75,7 @@
       <workItem from="1614934669015" duration="1899000" />
       <workItem from="1615022993783" duration="1403000" />
       <workItem from="1615046167231" duration="12335000" />
-      <workItem from="1615133723812" duration="3453000" />
+      <workItem from="1615133723812" duration="5302000" />
     </task>
     <task id="LOCAL-00001" summary="* code refactored">
       <created>1614799072800</created>
@@ -139,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615113948593</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="* code refactored&#10;* cell types added">
+      <created>1615232999268</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1615232999268</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +151,8 @@
     <MESSAGE value="* fixed bug&#10;* added top played direction" />
     <MESSAGE value="* added different player view when player move to the environment" />
     <MESSAGE value="* code refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="* code refactoring" />
+    <MESSAGE value="* code refactored&#10;* cell types added" />
+    <option name="LAST_COMMIT_MESSAGE" value="* code refactored&#10;* cell types added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="459" y="538" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614763582976">
