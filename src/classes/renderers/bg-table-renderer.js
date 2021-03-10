@@ -1,5 +1,4 @@
 import {Player} from "../cells/bg-table-cells/player.js";
-import Box from "../cells/bg-table-cells/box.js";
 import {Ground} from "../cells/bg-table-cells/ground.js";
 import {BrownBox} from "../cells/bg-table-cells/brown-box.js";
 import {Environment} from "../cells/bg-table-cells/environment.js";
@@ -8,110 +7,22 @@ import {SaturatedPlayer} from "../cells/bg-table-cells/saturated-player.js";
 import CellTypes from "../cells/cell-types.js";
 
 export class BgTableRenderer {
-    constructor(rootElementSelector) {
+    constructor(rootElementSelector, playingField) {
         this.rootElementSelector = rootElementSelector;
+        this.playingField = playingField;
         this.initializeDefaultData();
     }
 
     initializeDefaultData() {
         this.levels = [
-            this.getFirstLevelStructure(),
-            this.getSecondLevelStructure()
+            this.playingField.getFirstLevelStructure(),
+            this.playingField.getSecondLevelStructure()
         ];
         this.currentLevelIndex = 0;
-        this.currentLevelStructure = this.getFirstLevelStructure();
+        this.currentLevelStructure = this.playingField.getFirstLevelStructure();
         this.startNewGameBtnId = 'start-new-game';
         this.previousPlayerPosition = null;
         this.currentEnvironmentPosition = null;
-    }
-
-    getFirstLevelStructure() {
-        return [
-            [
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-            ],
-            [
-                new Box(),
-                new Ground(),
-                new Ground(),
-                new Player(),
-                new Ground(),
-                new Box(),
-            ],
-            [
-                new Box(),
-                new BrownBox(),
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box()
-            ],
-            [
-                new Box(),
-                new Ground(),
-                new Box()
-            ],
-            [
-                new Box(),
-                new Environment(),
-                new Box()
-            ],
-            [
-                new Box(),
-                new Box(),
-                new Box()
-            ]
-        ]
-    };
-
-    getSecondLevelStructure() {
-        return [
-            [
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-            ],
-            [
-                new Box(),
-                new Player(),
-                new Ground(),
-                new Ground(),
-                new Ground(),
-                new Box(),
-            ],
-            [
-                new Box(),
-                new Ground(),
-                new Ground(),
-                new BrownBox(),
-                new Environment(),
-                new Box()
-            ],
-            [
-                new Box(),
-                new Ground(),
-                new Environment(),
-                new BrownBox(),
-                new Ground(),
-                new Box()
-            ],
-            [
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-                new Box(),
-            ],
-        ]
     }
 
     getPreviousPlayerPosition() {
