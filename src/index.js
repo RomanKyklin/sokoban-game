@@ -9,7 +9,7 @@ import {CellsFactory} from "./classes/factories/cells-factory.js";
     const cellsFactory = new CellsFactory(CellsFactory.BG_TYPES.bg_table);
     const playingField = new PlayingField(cellsFactory);
     const gameRenderer = new BgTableRenderer('#root', playingField);
-    const gameEngine = new GameEngine(gameRenderer);
+    const gameEngine = new GameEngine(gameRenderer, playingField);
     const eventLoop = new EventLoop(gameEngine);
     gameRenderer.render();
     eventLoop.initNavigationListeners();
