@@ -18,8 +18,8 @@ export class BgTableRenderer {
             this.playingField.getFirstLevelStructure(),
             this.playingField.getSecondLevelStructure()
         ];
-        this.currentLevelIndex = 0;
-        this.currentLevelStructure = this.playingField.getFirstLevelStructure();
+        this.currentLevelIndex = 1;
+        this.currentLevelStructure = this.playingField.getSecondLevelStructure();
         this.startNewGameBtnId = 'start-new-game';
         this.previousPlayerPosition = null;
         this.currentEnvironmentPosition = null;
@@ -219,6 +219,12 @@ export class BgTableRenderer {
         this.changeElementTo(boxElement, new BrownBox());
     }
 
+    saturatedBoxAndReturnNewElement(boxElement) {
+        const newElement = new SaturatedBox();
+        this.changeElementTo(boxElement, newElement);
+        return newElement;
+    }
+
     unSaturateBoxAndReturnNewElement(boxElement) {
         const newElement = new BrownBox()
         this.changeElementTo(boxElement, newElement);
@@ -248,6 +254,13 @@ export class BgTableRenderer {
         setTimeout(() => {
             this.unSaturatePlayer();
             this.changeElementToEnvironment(this.getElement(rowIndex, cellIndex))
+        }, 0);
+    }
+
+    unSaturateBoxActions({rowIndex, cellIndex, element}) {
+        setTimeout(() => {
+            this.unSaturateBox(element);
+            this.saturatePlayer();
         }, 0);
     }
 

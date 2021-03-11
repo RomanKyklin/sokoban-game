@@ -48,32 +48,49 @@ export class GameEngine {
     ) {
         const {element, rowIndex, cellIndex} = this.gameRenderer.getElementFullData(elementFromPlayer);
         const fromBrownBoxElement = getElementFromFn(rowIndex, cellIndex);
-
         if (this.isGround(fromBrownBoxElement)) {
             this.gameRenderer.changePositions(fromBrownBoxElement, elementFromPlayer);
             playerDirectionFn();
         } else if (this.isEnvironmentBox(fromBrownBoxElement)) {
             this.gameRenderer.changePositions(elementFromPlayer, fromBrownBoxElement);
             playerDirectionFn();
-            this.gameRenderer.saturateBox(elementFromPlayer);
+            const saturatedBox = this.gameRenderer.saturatedBoxAndReturnNewElement(elementFromPlayer);
             this.gameRenderer.changeElementToGround(fromBrownBoxElement);
-            this.boxMeetEnvironment(fromBrownBoxElement);
+            this.boxMeetEnvironment(saturatedBox, fromBrownBoxElement);
         }
     }
 
-    boxMeetEnvironment(environment) {
-        this.environments.push(environment);
+    playerMeetSaturatedBox(nextElement, playerDirectionFn, getElementFromFn) {
+        const {rowIndex, cellIndex, element} = this.gameRenderer.getElementFullData(nextElement);
+        const nextToSaturatedBoxElement = getElementFromFn(rowIndex, cellIndex);
+
+        if (!this.isBox(nextToSaturatedBoxElement)) {
+            this.boxLeaveEnvironment(nextElement);
+            this.gameRenderer.unSaturateBoxActions(this.gameRenderer.getElementFullData(nextElement));
+            this.playerMeetBrownBox(
+                this.gameRenderer.unSaturateBoxAndReturnNewElement(nextElement),
+                playerDirectionFn,
+                getElementFromFn
+            );
+        }
+    }
+
+    boxMeetEnvironment(saturatedBoxObj, environment) {
+        this.environments.push([saturatedBoxObj, environment]);
 
         if (this.environments.length === this.getEnvironmentsToWin().length) {
             this.win()
         }
     }
 
-    boxLeaveEnvironment(environment) {
-        if (!this.environments.includes(environment)) {
-            throw new Error('environments array doesnt have this specific environment object')
+    boxLeaveEnvironment(saturatedBoxObj) {
+        const environmentBoxArray = this.environments.find(val => val.includes(saturatedBoxObj));
+
+        if (!environmentBoxArray) {
+            throw new Error('environments array doesnt have this specific saturated box');
         }
-        this.environments = this.environments.filter(val => val !== environment);
+
+        this.environments = this.environments.filter(val => !val.includes(saturatedBoxObj));
     }
 
     getEnvironmentsToWin() {
@@ -130,7 +147,7 @@ export class GameEngine {
         playerDirectionFn,
         getElementFromFn
     ) {
-        if (this.isPlayerSaturated() && !this.isBox(nextElement)) {
+        if (this.isPlayerSaturated() && !this.isBox(nextElement) && !this.isBrownBox(nextElement)) {
             this.gameRenderer.unSaturatePlayerActions(this.gameRenderer.getCurrentEnvironmentPosition());
         }
 
@@ -148,11 +165,11 @@ export class GameEngine {
                 playerDirectionFn
             );
         } else if (this.isSaturatedBox(nextElement)) {
-            this.playerMeetBrownBox(
-                this.gameRenderer.unSaturateBoxAndReturnNewElement(nextElement),
+            this.playerMeetSaturatedBox(
+                nextElement,
                 playerDirectionFn,
                 getElementFromFn
-            )
+            );
         }
     }
 
