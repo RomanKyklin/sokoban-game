@@ -171,6 +171,11 @@ export class GameEngine {
                 getElementFromFn
             );
         }
+        this.postGameActions();
+    }
+
+    postGameActions() {
+        this.startNewGameListener();
     }
 
     startNewGameListener() {
@@ -179,6 +184,7 @@ export class GameEngine {
     }
 
     startNewGame() {
+        this.refreshEnvironmentsToWin();
         this.gameRenderer.restartLevel();
     }
 

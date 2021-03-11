@@ -18,8 +18,8 @@ export class BgTableRenderer {
             this.playingField.getFirstLevelStructure(),
             this.playingField.getSecondLevelStructure()
         ];
-        this.currentLevelIndex = 1;
-        this.currentLevelStructure = this.playingField.getSecondLevelStructure();
+        this.currentLevelIndex = 0;
+        this.currentLevelStructure = this.playingField.getFirstLevelStructure();
         this.startNewGameBtnId = 'start-new-game';
         this.previousPlayerPosition = null;
         this.currentEnvironmentPosition = null;
