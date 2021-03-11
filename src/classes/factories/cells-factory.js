@@ -21,7 +21,7 @@ export class CellsFactory {
         bg_image: 'bg_image'
     }
 
-    types = {};
+    cells = {};
 
     constructor(bgType) {
         this.initializeCells(bgType);
@@ -29,7 +29,7 @@ export class CellsFactory {
 
     initializeCells(bgType) {
         if (bgType === CellsFactory.BG_TYPES.bg_table) {
-            this.types = {
+            this.cells = {
                 [CellTypes.PLAYER_TYPE]: BgTablePlayer,
                 [CellTypes.BOX_TYPE]: BgTableBox,
                 [CellTypes.BROWN_BOX_TYPE]: BgTableBrownBox,
@@ -39,7 +39,7 @@ export class CellsFactory {
                 [CellTypes.SATURATED_PLAYER_TYPE]: BgTableSaturatedPlayer
             }
         } else if (bgType === CellsFactory.BG_TYPES.bg_image) {
-            this.types = {
+            this.cells = {
                 [CellTypes.PLAYER_TYPE]: BgImagePlayer,
                 [CellTypes.BOX_TYPE]: BgImageBox,
                 [CellTypes.BROWN_BOX_TYPE]: BgImageBrownBox,
@@ -54,30 +54,30 @@ export class CellsFactory {
     }
 
     getPlayerInstance() {
-        return new this.types[CellTypes.PLAYER_TYPE];
+        return new this.cells[CellTypes.PLAYER_TYPE];
     }
 
     getBoxInstance() {
-        return new this.types[CellTypes.BOX_TYPE];
+        return new this.cells[CellTypes.BOX_TYPE];
     }
 
     getBrownBoxInstance() {
-        return new this.types[CellTypes.BROWN_BOX_TYPE];
+        return new this.cells[CellTypes.BROWN_BOX_TYPE];
     }
 
     getEnvironmentInstance() {
-        return new this.types[CellTypes.ENVIRONMENT_TYPE];
+        return new this.cells[CellTypes.ENVIRONMENT_TYPE];
     }
 
     getGroundInstance() {
-        return new this.types[CellTypes.GROUND_TYPE];
+        return new this.cells[CellTypes.GROUND_TYPE];
     }
 
     getSaturatedBoxInstance() {
-        return new this.types[CellTypes.SATURATED_BOX_TYPE];
+        return new this.cells[CellTypes.SATURATED_BOX_TYPE];
     }
 
     getSaturatedPlayerInstance() {
-        return new this.types[CellTypes.SATURATED_PLAYER_TYPE];
+        return new this.cells[CellTypes.SATURATED_PLAYER_TYPE];
     }
 }
