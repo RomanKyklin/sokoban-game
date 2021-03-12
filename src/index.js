@@ -12,13 +12,12 @@ import {GameMediator} from "./classes/ mediators/game-mediator.js";
     const playingField = new PlayingField(cellsFactory);
     const gameRenderer = new BgTableRenderer('#root', playingField);
     const gameEngine = new GameEngine(gameRenderer, playingField);
-    const gameMediator = new GameMediator();
 
     const gameFacade = new GameFacade(
         gameRenderer,
         gameEngine,
         new EventLoop(),
-        gameMediator
+        new GameMediator()
     );
     gameFacade.run();
 })(document)
