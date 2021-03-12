@@ -5,7 +5,7 @@ import {EventLoop} from "./classes/event-loop.js";
 import {PlayingField} from "./classes/playing-field.js";
 import {CellsFactory} from "./classes/factories/cells-factory.js";
 import {GameFacade} from "./classes/facades/game-facade.js";
-import {GameMediator} from "./classes/ mediators/game-mediator.js";
+import {GameMediator} from "./classes/mediators/game-mediator.js";
 
 (function game(document) {
     const cellsFactory = new CellsFactory(CellsFactory.BG_TYPES.bg_table);
