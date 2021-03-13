@@ -37,13 +37,13 @@ export class EventLoop {
             const {code} = $e;
 
             if (this.isLeftAction(code)) {
-                actionTypeFn(EventLoop.ACTION_TYPES.left)
+                actionTypeFn(EventLoop.ACTION_TYPES.left);
             } else if (this.isRightAction(code)) {
-                actionTypeFn(EventLoop.ACTION_TYPES.right)
+                actionTypeFn(EventLoop.ACTION_TYPES.right);
             } else if (this.isTopAction(code)) {
-                actionTypeFn(EventLoop.ACTION_TYPES.top)
+                actionTypeFn(EventLoop.ACTION_TYPES.top);
             } else if (this.isBottomAction(code)) {
-                actionTypeFn(EventLoop.ACTION_TYPES.bottom)
+                actionTypeFn(EventLoop.ACTION_TYPES.bottom);
             }
         })
     }
