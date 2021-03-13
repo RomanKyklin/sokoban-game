@@ -180,7 +180,7 @@ export class GameEngine {
                 alert(this.DO_NOT_HAVE_NEXT_LEVEL_MESSAGE);
             }
             this.startNewGame();
-        }, this.WIN_MESSAGE_TIMEOUT)
+        }, this.WIN_MESSAGE_TIMEOUT);
     }
 
     run() {
