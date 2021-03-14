@@ -10,25 +10,45 @@ export class GameFacade {
 
     settingUpSubscriptions() {
         this.settingUpInstall();
-        this.settingUpEventLoopSubscriptions();
+        this.settingUpGameEngineSubscriptions();
+        this.settingsUpGameRendererSubscriptions();
     }
 
-    settingUpEventLoopSubscriptions() {
-        this.eventLoop.subscribe.bind(this.gameMediator)(
+    settingUpGameEngineSubscriptions() {
+        this.gameEngine.subscribe.bind(this.gameMediator)(
             EventLoop.ACTION_TYPES.left,
             this.gameEngine.leftAction.bind(this.gameEngine)
         );
-        this.eventLoop.subscribe.bind(this.gameMediator)(
+        this.gameEngine.subscribe.bind(this.gameMediator)(
             EventLoop.ACTION_TYPES.right,
             this.gameEngine.rightAction.bind(this.gameEngine)
         );
-        this.eventLoop.subscribe.bind(this.gameMediator)(
+        this.gameEngine.subscribe.bind(this.gameMediator)(
             EventLoop.ACTION_TYPES.top,
             this.gameEngine.upAction.bind(this.gameEngine)
         );
-        this.eventLoop.subscribe.bind(this.gameMediator)(
+        this.gameEngine.subscribe.bind(this.gameMediator)(
             EventLoop.ACTION_TYPES.bottom,
             this.gameEngine.bottomAction.bind(this.gameEngine)
+        );
+    }
+
+    settingsUpGameRendererSubscriptions() {
+        this.gameRenderer.subscribe.bind(this.gameMediator)(
+            EventLoop.ACTION_TYPES.left,
+            () => console.log('left from game renderer')
+        );
+        this.gameRenderer.subscribe.bind(this.gameMediator)(
+            EventLoop.ACTION_TYPES.right,
+            () => console.log('right from game renderer')
+        );
+        this.gameRenderer.subscribe.bind(this.gameMediator)(
+            EventLoop.ACTION_TYPES.top,
+            () => console.log('top from game renderer')
+        );
+        this.gameRenderer.subscribe.bind(this.gameMediator)(
+            EventLoop.ACTION_TYPES.bottom,
+            () => console.log('bottom from game renderer')
         );
     }
 
