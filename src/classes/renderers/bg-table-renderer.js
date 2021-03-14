@@ -7,9 +7,8 @@ import {SaturatedPlayer} from "../cells/bg-table-cells/saturated-player.js";
 import CellTypes from "../cells/cell-types.js";
 
 export class BgTableRenderer {
-    constructor(rootElementSelector, playingField, levelsManager) {
+    constructor(rootElementSelector, levelsManager) {
         this.rootElementSelector = rootElementSelector;
-        this.playingField = playingField;
         this.levelsManager = levelsManager;
         this.initializeDefaultData();
     }

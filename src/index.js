@@ -14,7 +14,6 @@ import {LevelsManager} from "./classes/levels-manager.js";
     const levelsManager = new LevelsManager(0, playingField.getAllLevels());
     const gameRenderer = new BgTableRenderer(
         '#root',
-        playingField,
         levelsManager
     );
     const gameEngine = new GameEngine(
