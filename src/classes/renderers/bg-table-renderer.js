@@ -2,12 +2,10 @@ export class BgTableRenderer {
     constructor(rootElementSelector, levelsManager) {
         this.rootElementSelector = rootElementSelector;
         this.levelsManager = levelsManager;
-        this.initializeDefaultData();
     }
 
-    initializeDefaultData() {
-        this.currentLevelStructure = this.levelsManager.getCurrentLevel();
-        this.startNewGameBtnId = 'start-new-game';
+    initializeLevelStructure() {
+        this.currentLevelStructure = this.levelsManager.getCurrentLevelStructure();
     }
 
     restartLevel() {
@@ -16,12 +14,9 @@ export class BgTableRenderer {
     }
 
     renderNextLevel() {
+        console.log('next level')
         this.currentLevelStructure = this.levelsManager.getNextLevel();
         this.render();
-    }
-
-    getNewGameBtn() {
-        return document.querySelector(`#${this.startNewGameBtnId}`);
     }
 
     getHtml() {
@@ -29,7 +24,7 @@ export class BgTableRenderer {
                     <header class="header">
                         <nav class="header__nav">
                             <ul class="header__ul">
-                                <li class="header__li" id="${this.startNewGameBtnId}">Начать заново</li>
+                                <li class="header__li" id="startNewGameBtnId">Начать заново</li>
                             </ul>
                         </nav>
                     </header>
@@ -52,7 +47,7 @@ export class BgTableRenderer {
         if (!rootElement) {
             throw new Error('root element was not found!');
         }
-
+        this.initializeLevelStructure();
         rootElement.innerHTML = this.getHtml();
     }
 }

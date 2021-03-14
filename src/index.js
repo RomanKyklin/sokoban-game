@@ -12,20 +12,24 @@ import {LevelsManager} from "./classes/levels-manager.js";
     const cellsFactory = new CellsFactory(CellsFactory.BG_TYPES.bg_table);
     const playingField = new PlayingField(cellsFactory);
     const levelsManager = new LevelsManager(0, playingField.getAllLevels());
+    const mediator = new GameMediator();
+
     const gameRenderer = new BgTableRenderer(
         '#root',
         levelsManager
     );
+
     const gameEngine = new GameEngine(
         playingField,
-        levelsManager
+        levelsManager,
+        mediator
     );
 
     const gameFacade = new GameFacade(
         gameRenderer,
         gameEngine,
         new EventLoop(),
-        new GameMediator()
+        mediator
     );
     gameFacade.run();
 })(document)

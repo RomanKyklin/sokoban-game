@@ -7,7 +7,9 @@ export class GameMediator {
         on_left: 'on_left',
         on_right: 'on_right',
         on_top: 'on_top',
-        on_bottom: 'on_bottom'
+        on_bottom: 'on_bottom',
+        start_new_game: 'start_new_game',
+        to_the_next_level: 'to_the_next_level'
     }
 
     subscribe(channel, fn) {

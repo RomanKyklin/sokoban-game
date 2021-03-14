@@ -20,6 +20,10 @@ export class LevelsManager {
         return this.levelsStructure[this.currentLevelIndex];
     }
 
+    getCurrentLevelStructure() {
+        return this.currentLevelStructure;
+    }
+
     hasNextLevel() {
         return this.levelsStructure[this.currentLevelIndex + 1];
     }
@@ -29,6 +33,7 @@ export class LevelsManager {
             throw new Error('Next level doesnt exists');
         }
         this.currentLevelIndex += 1;
+        this.currentLevelStructure = this.getCurrentLevel();
         return this.levelsStructure[this.currentLevelIndex];
     }
 

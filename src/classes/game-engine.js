@@ -1,7 +1,11 @@
+import {GameMediator} from "./mediators/game-mediator.js";
+
 export class GameEngine {
-    constructor(playingField, levelsManager) {
+    constructor(playingField, levelsManager, mediator) {
         this.playingField = playingField;
         this.levelsManager = levelsManager;
+        this.mediator = mediator;
+        this.startNewGameBtnId = 'start-new-game';
     }
 
     WIN_MESSAGE_TIMEOUT = 0;
@@ -155,13 +159,12 @@ export class GameEngine {
     }
 
     startNewGameListener() {
-        // const newGameBtn = this.gameRenderer.getNewGameBtn();
-        // newGameBtn.addEventListener('click', () => this.startNewGame());
+        document.getElementById('startNewGameBtnId').addEventListener('click', () => this.startNewGame());
     }
 
     startNewGame() {
         this.refreshEnvironmentsToWin();
-        // this.gameRenderer.restartLevel();
+        this.mediator.publish(GameMediator.GAME_ENGINE_ACTIONS.start_new_game);
     }
 
     showWinMessage() {
@@ -174,7 +177,7 @@ export class GameEngine {
             this.refreshEnvironmentsToWin();
             const isStartNextLevel = confirm(this.NEXT_LEVEL_MESSAGE);
             if (this.levelsManager.hasNextLevel() && isStartNextLevel) {
-                // this.gameRenderer.renderNextLevel();
+                this.mediator.publish(GameMediator.GAME_ENGINE_ACTIONS.to_the_next_level);
                 return;
             } else if (!this.levelsManager.hasNextLevel() && isStartNextLevel) {
                 alert(this.DO_NOT_HAVE_NEXT_LEVEL_MESSAGE);

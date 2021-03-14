@@ -63,6 +63,14 @@ export class GameFacade {
             GameMediator.GAME_ENGINE_ACTIONS.on_bottom,
             () => this.gameRenderer.render.call(this.gameRenderer)
         );
+        this.gameRenderer.subscribe.bind(this.gameMediator)(
+            GameMediator.GAME_ENGINE_ACTIONS.start_new_game,
+            () => this.gameRenderer.restartLevel.call(this.gameRenderer)
+        );
+        this.gameRenderer.subscribe.bind(this.gameMediator)(
+            GameMediator.GAME_ENGINE_ACTIONS.to_the_next_level,
+            () => this.gameRenderer.renderNextLevel.call(this.gameRenderer)
+        );
     }
 
     settingUpInstall() {
