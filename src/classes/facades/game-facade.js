@@ -1,4 +1,5 @@
 import {EventLoop} from "../event-loop.js";
+import {GameMediator} from "../mediators/game-mediator.js";
 
 export class GameFacade {
     constructor(gameRenderer, gameEngine, eventLoop, gameMediator) {
@@ -17,37 +18,49 @@ export class GameFacade {
     settingUpGameEngineSubscriptions() {
         this.gameEngine.subscribe.bind(this.gameMediator)(
             EventLoop.ACTION_TYPES.left,
-            this.gameEngine.leftAction.bind(this.gameEngine)
+            () => {
+                this.gameEngine.leftAction.call(this.gameEngine);
+                this.gameEngine.publish.bind(this.gameMediator)(GameMediator.GAME_ENGINE_ACTIONS.on_left);
+            }
         );
         this.gameEngine.subscribe.bind(this.gameMediator)(
             EventLoop.ACTION_TYPES.right,
-            this.gameEngine.rightAction.bind(this.gameEngine)
+            () => {
+                this.gameEngine.rightAction.call(this.gameEngine);
+                this.gameEngine.publish.bind(this.gameMediator)(GameMediator.GAME_ENGINE_ACTIONS.on_right);
+            }
         );
         this.gameEngine.subscribe.bind(this.gameMediator)(
             EventLoop.ACTION_TYPES.top,
-            this.gameEngine.upAction.bind(this.gameEngine)
+            () => {
+                this.gameEngine.upAction.call(this.gameEngine);
+                this.gameEngine.publish.bind(this.gameMediator)(GameMediator.GAME_ENGINE_ACTIONS.on_top);
+            }
         );
         this.gameEngine.subscribe.bind(this.gameMediator)(
             EventLoop.ACTION_TYPES.bottom,
-            this.gameEngine.bottomAction.bind(this.gameEngine)
+            () => {
+                this.gameEngine.bottomAction.call(this.gameEngine);
+                this.gameEngine.publish.bind(this.gameMediator)(GameMediator.GAME_ENGINE_ACTIONS.on_bottom);
+            }
         );
     }
 
     settingsUpGameRendererSubscriptions() {
         this.gameRenderer.subscribe.bind(this.gameMediator)(
-            EventLoop.ACTION_TYPES.left,
+            GameMediator.GAME_ENGINE_ACTIONS.on_left,
             () => console.log('left from game renderer')
         );
         this.gameRenderer.subscribe.bind(this.gameMediator)(
-            EventLoop.ACTION_TYPES.right,
+            GameMediator.GAME_ENGINE_ACTIONS.on_right,
             () => console.log('right from game renderer')
         );
         this.gameRenderer.subscribe.bind(this.gameMediator)(
-            EventLoop.ACTION_TYPES.top,
+            GameMediator.GAME_ENGINE_ACTIONS.on_top,
             () => console.log('top from game renderer')
         );
         this.gameRenderer.subscribe.bind(this.gameMediator)(
-            EventLoop.ACTION_TYPES.bottom,
+            GameMediator.GAME_ENGINE_ACTIONS.on_bottom,
             () => console.log('bottom from game renderer')
         );
     }

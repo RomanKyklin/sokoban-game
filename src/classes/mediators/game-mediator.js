@@ -3,6 +3,13 @@ export class GameMediator {
         this.channels = {};
     }
 
+    static GAME_ENGINE_ACTIONS = {
+        on_left: 'on_left',
+        on_right: 'on_right',
+        on_top: 'on_top',
+        on_bottom: 'on_bottom'
+    }
+
     subscribe(channel, fn) {
         if (!this.channels[channel]) {
             this.channels[channel] = []
