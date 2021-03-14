@@ -1,23 +1,23 @@
 export class LevelsManager {
-    constructor(startLevel = 0, levelsStructure = []) {
+    constructor(startLevelIndex = 0, levelsStructure = []) {
         this.levelsStructure = levelsStructure;
-        this.startLevel = startLevel;
-        this.currentLevel = startLevel;
+        this.startLevelIndex = startLevelIndex;
+        this.currentLevelIndex = startLevelIndex;
     }
 
     getCurrentLevel() {
-        return this.levelsStructure[this.currentLevel];
+        return this.levelsStructure[this.currentLevelIndex];
     }
 
     hasNextLevel() {
-        return this.levelsStructure[this.currentLevel + 1];
+        return this.levelsStructure[this.currentLevelIndex + 1];
     }
 
     getNextLevel() {
         if (!this.hasNextLevel()) {
             throw new Error('Next level doesnt exists');
         }
-        this.currentLevel += 1;
-        return this.levelsStructure[this.currentLevel];
+        this.currentLevelIndex += 1;
+        return this.levelsStructure[this.currentLevelIndex];
     }
 }
