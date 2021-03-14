@@ -14,7 +14,6 @@ export class BgTableRenderer {
     }
 
     renderNextLevel() {
-        console.log('next level')
         this.currentLevelStructure = this.levelsManager.getNextLevel();
         this.render();
     }
