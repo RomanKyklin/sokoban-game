@@ -17,7 +17,6 @@ import {LevelsManager} from "./classes/levels-manager.js";
         levelsManager
     );
     const gameEngine = new GameEngine(
-        gameRenderer,
         playingField,
         levelsManager
     );

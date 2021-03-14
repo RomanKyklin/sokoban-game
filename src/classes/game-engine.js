@@ -1,6 +1,5 @@
 export class GameEngine {
-    constructor(gameRenderer, playingField, levelsManager) {
-        this.gameRenderer = gameRenderer;
+    constructor(playingField, levelsManager) {
         this.playingField = playingField;
         this.levelsManager = levelsManager;
     }
@@ -21,29 +20,29 @@ export class GameEngine {
         playerDirectionFn,
         getElementFromFn,
     ) {
-        const {element, rowIndex, cellIndex} = this.gameRenderer.getElementFullData(elementFromPlayer);
+        const {element, rowIndex, cellIndex} = this.levelsManager.getElementFullData(elementFromPlayer);
         const fromBrownBoxElement = getElementFromFn(rowIndex, cellIndex);
         if (this.playingField.isGround(fromBrownBoxElement)) {
-            this.gameRenderer.changePositions(fromBrownBoxElement, elementFromPlayer);
+            this.levelsManager.changePositions(fromBrownBoxElement, elementFromPlayer);
             playerDirectionFn();
         } else if (this.playingField.isEnvironmentBox(fromBrownBoxElement)) {
-            this.gameRenderer.changePositions(elementFromPlayer, fromBrownBoxElement);
+            this.levelsManager.changePositions(elementFromPlayer, fromBrownBoxElement);
             playerDirectionFn();
-            const saturatedBox = this.gameRenderer.saturatedBoxAndReturnNewElement(elementFromPlayer);
-            this.gameRenderer.changeElementToGround(fromBrownBoxElement);
+            const saturatedBox = this.levelsManager.saturatedBoxAndReturnNewElement(elementFromPlayer);
+            this.levelsManager.changeElementToGround(fromBrownBoxElement);
             this.boxMeetEnvironment(saturatedBox, fromBrownBoxElement);
         }
     }
 
     playerMeetSaturatedBox(nextElement, playerDirectionFn, getElementFromFn) {
-        const {rowIndex, cellIndex, element} = this.gameRenderer.getElementFullData(nextElement);
+        const {rowIndex, cellIndex, element} = this.levelsManager.getElementFullData(nextElement);
         const nextToSaturatedBoxElement = getElementFromFn(rowIndex, cellIndex);
 
         if (!this.playingField.isBox(nextToSaturatedBoxElement)) {
             this.boxLeaveEnvironment(nextElement);
-            this.gameRenderer.unSaturateBoxActions(this.gameRenderer.getElementFullData(nextElement));
+            this.levelsManager.unSaturateBoxActions(this.levelsManager.getElementFullData(nextElement));
             this.playerMeetBrownBox(
-                this.gameRenderer.unSaturateBoxAndReturnNewElement(nextElement),
+                this.levelsManager.unSaturateBoxAndReturnNewElement(nextElement),
                 playerDirectionFn,
                 getElementFromFn
             );
@@ -81,39 +80,39 @@ export class GameEngine {
 
     playerMeetEnvironment(environmentElement, playerDirectionFn) {
         playerDirectionFn();
-        this.gameRenderer.saturatePlayer();
-        this.gameRenderer.changeElementToGround(environmentElement);
+        this.levelsManager.saturatePlayer();
+        this.levelsManager.changeElementToGround(environmentElement);
     }
 
     rightAction() {
         this.gameActions(
-            this.gameRenderer.getRightElementFromThePlayer(),
-            this.gameRenderer.playerToRight.bind(this.gameRenderer),
-            this.gameRenderer.getRightElementFrom.bind(this.gameRenderer)
+            this.levelsManager.getRightElementFromThePlayer(),
+            this.levelsManager.playerToRight.bind(this.levelsManager),
+            this.levelsManager.getRightElementFrom.bind(this.levelsManager)
         );
     }
 
     leftAction() {
         this.gameActions(
-            this.gameRenderer.getLeftElementFromThePlayer(),
-            this.gameRenderer.playerToLeft.bind(this.gameRenderer),
-            this.gameRenderer.getLeftElementFrom.bind(this.gameRenderer)
+            this.levelsManager.getLeftElementFromThePlayer(),
+            this.levelsManager.playerToLeft.bind(this.levelsManager),
+            this.levelsManager.getLeftElementFrom.bind(this.levelsManager)
         );
     }
 
     upAction() {
         this.gameActions(
-            this.gameRenderer.getTopElementFromThePlayer(),
-            this.gameRenderer.playerToTop.bind(this.gameRenderer),
-            this.gameRenderer.getTopElementFrom.bind(this.gameRenderer)
+            this.levelsManager.getTopElementFromThePlayer(),
+            this.levelsManager.playerToTop.bind(this.levelsManager),
+            this.levelsManager.getTopElementFrom.bind(this.levelsManager)
         );
     }
 
     bottomAction() {
         this.gameActions(
-            this.gameRenderer.getBottomElementFromThePlayer(),
-            this.gameRenderer.playerToBottom.bind(this.gameRenderer),
-            this.gameRenderer.getBottomElementFrom.bind(this.gameRenderer)
+            this.levelsManager.getBottomElementFromThePlayer(),
+            this.levelsManager.playerToBottom.bind(this.levelsManager),
+            this.levelsManager.getBottomElementFrom.bind(this.levelsManager)
         );
     }
 
@@ -122,10 +121,10 @@ export class GameEngine {
         playerDirectionFn,
         getElementFromFn
     ) {
-        if (this.playingField.isPlayerSaturated(this.gameRenderer.getCurrentPlayerData().player)
+        if (this.playingField.isPlayerSaturated(this.levelsManager.getCurrentPlayerData().player)
             && !this.playingField.isBox(nextElement)
             && !this.playingField.isBrownBox(nextElement)) {
-            this.gameRenderer.unSaturatePlayerActions(this.gameRenderer.getCurrentEnvironmentPosition());
+            this.levelsManager.unSaturatePlayerActions(this.levelsManager.getCurrentEnvironmentPosition());
         }
 
         if (this.playingField.isGround(nextElement)) {
@@ -156,13 +155,13 @@ export class GameEngine {
     }
 
     startNewGameListener() {
-        const newGameBtn = this.gameRenderer.getNewGameBtn();
-        newGameBtn.addEventListener('click', () => this.startNewGame());
+        // const newGameBtn = this.gameRenderer.getNewGameBtn();
+        // newGameBtn.addEventListener('click', () => this.startNewGame());
     }
 
     startNewGame() {
         this.refreshEnvironmentsToWin();
-        this.gameRenderer.restartLevel();
+        // this.gameRenderer.restartLevel();
     }
 
     showWinMessage() {
@@ -175,7 +174,7 @@ export class GameEngine {
             this.refreshEnvironmentsToWin();
             const isStartNextLevel = confirm(this.NEXT_LEVEL_MESSAGE);
             if (this.levelsManager.hasNextLevel() && isStartNextLevel) {
-                this.gameRenderer.renderNextLevel();
+                // this.gameRenderer.renderNextLevel();
                 return;
             } else if (!this.levelsManager.hasNextLevel() && isStartNextLevel) {
                 alert(this.DO_NOT_HAVE_NEXT_LEVEL_MESSAGE);

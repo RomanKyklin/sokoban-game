@@ -49,19 +49,19 @@ export class GameFacade {
     settingsUpGameRendererSubscriptions() {
         this.gameRenderer.subscribe.bind(this.gameMediator)(
             GameMediator.GAME_ENGINE_ACTIONS.on_left,
-            () => console.log('left from game renderer')
+            () => this.gameRenderer.render.call(this.gameRenderer)
         );
         this.gameRenderer.subscribe.bind(this.gameMediator)(
             GameMediator.GAME_ENGINE_ACTIONS.on_right,
-            () => console.log('right from game renderer')
+            () => this.gameRenderer.render.call(this.gameRenderer)
         );
         this.gameRenderer.subscribe.bind(this.gameMediator)(
             GameMediator.GAME_ENGINE_ACTIONS.on_top,
-            () => console.log('top from game renderer')
+            () => this.gameRenderer.render.call(this.gameRenderer)
         );
         this.gameRenderer.subscribe.bind(this.gameMediator)(
             GameMediator.GAME_ENGINE_ACTIONS.on_bottom,
-            () => console.log('bottom from game renderer')
+            () => this.gameRenderer.render.call(this.gameRenderer)
         );
     }
 
