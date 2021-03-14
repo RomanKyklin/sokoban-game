@@ -94,6 +94,13 @@ export class PlayingField {
         ]
     }
 
+    getAllLevels() {
+        return [
+            this.getFirstLevelStructure(),
+            this.getSecondLevelStructure()
+        ]
+    }
+
     isBox(element) {
         return element.getType() === CellTypes.BOX_TYPE;
     }

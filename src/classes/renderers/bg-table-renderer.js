@@ -7,19 +7,15 @@ import {SaturatedPlayer} from "../cells/bg-table-cells/saturated-player.js";
 import CellTypes from "../cells/cell-types.js";
 
 export class BgTableRenderer {
-    constructor(rootElementSelector, playingField) {
+    constructor(rootElementSelector, playingField, levelsManager) {
         this.rootElementSelector = rootElementSelector;
         this.playingField = playingField;
+        this.levelsManager = levelsManager;
         this.initializeDefaultData();
     }
 
     initializeDefaultData() {
-        this.levels = [
-            this.playingField.getFirstLevelStructure(),
-            this.playingField.getSecondLevelStructure()
-        ];
-        this.currentLevelIndex = 0;
-        this.currentLevelStructure = this.playingField.getFirstLevelStructure();
+        this.currentLevelStructure = this.levelsManager.getCurrentLevel();
         this.startNewGameBtnId = 'start-new-game';
         this.previousPlayerPosition = null;
         this.currentEnvironmentPosition = null;
@@ -47,29 +43,13 @@ export class BgTableRenderer {
         }
     }
 
-    getCurrentLevelStructure() {
-        return this.levels[this.currentLevelIndex];
-    }
-
     restartLevel() {
-        this.currentLevelStructure = this.getCurrentLevelStructure();
+        this.currentLevelStructure = this.levelsManager.getCurrentLevel();
         this.render();
     }
 
-    hasNextLevel() {
-        return this.levels[this.currentLevelIndex + 1] !== undefined;
-    }
-
-    getNextLevel() {
-        if (!this.hasNextLevel()) {
-            throw new Error('Next level doesnt exists');
-        }
-        this.currentLevelIndex += 1;
-        return this.levels[this.currentLevelIndex];
-    }
-
     renderNextLevel() {
-        this.currentLevelStructure = this.getNextLevel();
+        this.currentLevelStructure = this.levelsManager.getNextLevel();
         this.render();
     }
 

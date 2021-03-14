@@ -1,7 +1,8 @@
 export class GameEngine {
-    constructor(gameRenderer, playingField) {
+    constructor(gameRenderer, playingField, levelsManager) {
         this.gameRenderer = gameRenderer;
         this.playingField = playingField;
+        this.levelsManager = levelsManager;
     }
 
     WIN_MESSAGE_TIMEOUT = 0;
@@ -68,7 +69,7 @@ export class GameEngine {
     }
 
     getEnvironmentsToWin() {
-        const gameStructure = this.gameRenderer.getCurrentLevelStructure();
+        const gameStructure = this.levelsManager.getCurrentLevel();
         const environments = [];
         gameStructure.forEach(row => {
             row.forEach(cell => {
@@ -173,10 +174,10 @@ export class GameEngine {
             this.showWinMessage();
             this.refreshEnvironmentsToWin();
             const isStartNextLevel = confirm(this.NEXT_LEVEL_MESSAGE);
-            if (this.gameRenderer.hasNextLevel() && isStartNextLevel) {
+            if (this.levelsManager.hasNextLevel() && isStartNextLevel) {
                 this.gameRenderer.renderNextLevel();
                 return;
-            } else if (!this.gameRenderer.hasNextLevel() && isStartNextLevel) {
+            } else if (!this.levelsManager.hasNextLevel() && isStartNextLevel) {
                 alert(this.DO_NOT_HAVE_NEXT_LEVEL_MESSAGE);
             }
             this.startNewGame();
