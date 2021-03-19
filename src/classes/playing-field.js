@@ -2,8 +2,7 @@ import CellTypes from "./cells/cell-types.js";
 import {CELL_TYPES} from "./cells/cell-types.js";
 
 export class PlayingField {
-    constructor(cellsFactory) {
-        this.cellsFactory = cellsFactory;
+    constructor() {
     }
 
     getFirstLevelStructure() {
