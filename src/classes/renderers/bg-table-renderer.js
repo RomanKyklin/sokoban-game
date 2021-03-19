@@ -41,8 +41,6 @@ export class BgTableRenderer {
     }
 
     getHtml() {
-        console.log(this.currentLevelStructure);
-        return;
         return `<div class="main">
                     <header class="header">
                         <nav class="header__nav">
@@ -55,8 +53,8 @@ export class BgTableRenderer {
                 <section class="game">
                     <table class="game__table">
                     ${this.currentLevelStructure.map(val => {
-            return `<tr class="game__table__tr">
-                                                              ${val.map(val => val.getHtml()).join('')}
+                                        return `<tr class="game__table__tr">
+                                                             ${val.map(val => iSkin[val]).join('')}
                                         </tr>`
         }).join('')}
                     </table>
