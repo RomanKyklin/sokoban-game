@@ -4,7 +4,6 @@ import {ImageTableRenderer} from "./classes/renderers/image-table-renderer.js";
 import {EventLoop} from "./classes/event-loop.js";
 import {PlayingField} from "./classes/playing-field.js";
 import {CellsFactory} from "./classes/factories/cells-factory.js";
-import {GameFacade} from "./classes/facades/game-facade.js";
 import {GameMediator} from "./classes/mediators/game-mediator.js";
 import {LevelsManager} from "./classes/levels-manager.js";
 
@@ -16,7 +15,8 @@ import {LevelsManager} from "./classes/levels-manager.js";
 
     const gameRenderer = new BgTableRenderer(
         '#root',
-        levelsManager
+        levelsManager,
+        mediator
     );
 
     const gameEngine = new GameEngine(
@@ -25,11 +25,11 @@ import {LevelsManager} from "./classes/levels-manager.js";
         mediator
     );
 
-    const gameFacade = new GameFacade(
-        gameRenderer,
-        gameEngine,
-        new EventLoop(),
-        mediator
-    );
-    gameFacade.run();
+    const eventLoop = new EventLoop(mediator);
+
+    gameRenderer.render();
+    eventLoop.initNavigationListeners(actionType => {
+        this.eventLoop.publish.bind(this.gameMediator, actionType)();
+    });
+    gameEngine.run();
 })(document)
