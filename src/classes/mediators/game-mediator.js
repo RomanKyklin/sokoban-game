@@ -1,15 +1,16 @@
+export const GAME_ENGINE_ACTIONS = {
+    on_left: 'on_left',
+    on_right: 'on_right',
+    on_top: 'on_top',
+    on_bottom: 'on_bottom',
+    start_new_game: 'start_new_game',
+    to_the_next_level: 'to_the_next_level',
+    rerender_game: 'rerender_game'
+}
+
 export class GameMediator {
     constructor() {
         this.channels = {};
-    }
-
-    static GAME_ENGINE_ACTIONS = {
-        on_left: 'on_left',
-        on_right: 'on_right',
-        on_top: 'on_top',
-        on_bottom: 'on_bottom',
-        start_new_game: 'start_new_game',
-        to_the_next_level: 'to_the_next_level'
     }
 
     subscribe(channel, fn) {
@@ -35,10 +36,5 @@ export class GameMediator {
             subscription.callback.apply(subscription.context, args);
         }
         return this;
-    }
-
-    installTo(obj) {
-        obj.subscribe = this.subscribe;
-        obj.publish = this.publish;
     }
 }

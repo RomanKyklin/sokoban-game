@@ -1,11 +1,21 @@
+import {GAME_ENGINE_ACTIONS} from "../mediators/game-mediator.js";
+
 export class BgTableRenderer {
-    constructor(rootElementSelector, levelsManager) {
+    constructor(rootElementSelector, levelsManager, mediator) {
         this.rootElementSelector = rootElementSelector;
         this.levelsManager = levelsManager;
+        this.mediator = mediator;
+        this.initializeMediatorListeners();
     }
 
     initializeLevelStructure() {
         this.currentLevelStructure = this.levelsManager.getCurrentLevelStructure();
+    }
+
+    initializeMediatorListeners() {
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.rerender_game, this.render.bind(this));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.start_new_game, this.restartLevel.bind(this));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.to_the_next_level, this.renderNextLevel.bind(this));
     }
 
     restartLevel() {

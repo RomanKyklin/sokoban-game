@@ -25,7 +25,7 @@ export class LevelsManager {
     }
 
     hasNextLevel() {
-        return this.levelsStructure[this.currentLevelIndex + 1];
+        return this.levelsStructure[this.currentLevelIndex + 1] != undefined;
     }
 
     getNextLevel() {

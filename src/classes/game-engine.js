@@ -1,4 +1,4 @@
-import {GameMediator} from "./mediators/game-mediator.js";
+import {GAME_ENGINE_ACTIONS} from "./mediators/game-mediator.js";
 
 export class GameEngine {
     constructor(playingField, levelsManager, mediator) {
@@ -156,6 +156,7 @@ export class GameEngine {
 
     postGameActions() {
         this.startNewGameListener();
+        this.mediator.publish(GAME_ENGINE_ACTIONS.rerender_game);
     }
 
     startNewGameListener() {
@@ -164,7 +165,14 @@ export class GameEngine {
 
     startNewGame() {
         this.refreshEnvironmentsToWin();
-        this.mediator.publish(GameMediator.GAME_ENGINE_ACTIONS.start_new_game);
+        this.mediator.publish(GAME_ENGINE_ACTIONS.start_new_game);
+    }
+
+    initializeMediatorListeners() {
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_left, this.leftAction.bind(this));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_right, this.rightAction.bind(this));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_top, this.upAction.bind(this));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_bottom, this.bottomAction.bind(this));
     }
 
     showWinMessage() {
@@ -177,7 +185,7 @@ export class GameEngine {
             this.refreshEnvironmentsToWin();
             const isStartNextLevel = confirm(this.NEXT_LEVEL_MESSAGE);
             if (this.levelsManager.hasNextLevel() && isStartNextLevel) {
-                this.mediator.publish(GameMediator.GAME_ENGINE_ACTIONS.to_the_next_level);
+                this.mediator.publish(GAME_ENGINE_ACTIONS.to_the_next_level);
                 return;
             } else if (!this.levelsManager.hasNextLevel() && isStartNextLevel) {
                 alert(this.DO_NOT_HAVE_NEXT_LEVEL_MESSAGE);
@@ -187,6 +195,7 @@ export class GameEngine {
     }
 
     run() {
+        this.initializeMediatorListeners();
         this.startNewGameListener();
     }
 }

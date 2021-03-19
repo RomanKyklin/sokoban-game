@@ -28,8 +28,6 @@ import {LevelsManager} from "./classes/levels-manager.js";
     const eventLoop = new EventLoop(mediator);
 
     gameRenderer.render();
-    eventLoop.initNavigationListeners(actionType => {
-        this.eventLoop.publish.bind(this.gameMediator, actionType)();
-    });
+    eventLoop.initNavigationListeners();
     gameEngine.run();
 })(document)

@@ -1,5 +1,8 @@
+import {GAME_ENGINE_ACTIONS} from "./mediators/game-mediator.js";
+
 export class EventLoop {
-    constructor() {
+    constructor(mediator) {
+        this.mediator = mediator;
     }
 
     KEYBOARD_CODES = {
@@ -7,13 +10,6 @@ export class EventLoop {
         rightCodes: ['ArrowRight', 'KeyD'],
         topCodes: ['ArrowUp', 'KeyW'],
         bottomCodes: ['ArrowDown', 'KeyS'],
-    }
-
-    static ACTION_TYPES = {
-        right: 'right',
-        left: 'left',
-        top: 'top',
-        bottom: 'bottom'
     }
 
     isRightAction(code) {
@@ -32,18 +28,18 @@ export class EventLoop {
         return this.KEYBOARD_CODES.bottomCodes.includes(code);
     }
 
-    initNavigationListeners(actionTypeFn) {
+    initNavigationListeners() {
         document.addEventListener('keydown', $e => {
             const {code} = $e;
 
             if (this.isLeftAction(code)) {
-                actionTypeFn(EventLoop.ACTION_TYPES.left);
+                this.mediator.publish(GAME_ENGINE_ACTIONS.on_left);
             } else if (this.isRightAction(code)) {
-                actionTypeFn(EventLoop.ACTION_TYPES.right);
+                this.mediator.publish(GAME_ENGINE_ACTIONS.on_right);
             } else if (this.isTopAction(code)) {
-                actionTypeFn(EventLoop.ACTION_TYPES.top);
+                this.mediator.publish(GAME_ENGINE_ACTIONS.on_top);
             } else if (this.isBottomAction(code)) {
-                actionTypeFn(EventLoop.ACTION_TYPES.bottom);
+                this.mediator.publish(GAME_ENGINE_ACTIONS.on_bottom);
             }
         })
     }
