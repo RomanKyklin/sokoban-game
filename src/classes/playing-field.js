@@ -1,4 +1,5 @@
 import CellTypes from "./cells/cell-types.js";
+import {CELL_TYPES} from "./cells/cell-types.js";
 
 export class PlayingField {
     constructor(cellsFactory) {
@@ -7,45 +8,12 @@ export class PlayingField {
 
     getFirstLevelStructure() {
         return [
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getPlayerInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBrownBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getEnvironmentInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ]
+            [CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.BOX, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.EMPTY, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.TARGET, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL],
         ]
     };
 
