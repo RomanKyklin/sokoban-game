@@ -19,46 +19,12 @@ export class PlayingField {
 
     getSecondLevelStructure() {
         return [
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getPlayerInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getBrownBoxInstance(),
-                this.cellsFactory.getEnvironmentInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getEnvironmentInstance(),
-                this.cellsFactory.getBrownBoxInstance(),
-                this.cellsFactory.getGroundInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
-            [
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-                this.cellsFactory.getBoxInstance(),
-            ],
+            [CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.PLAYER_ON_EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.BOX_ON_EMPTY, CELL_TYPES.TARGET, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.BOX_ON_EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.TARGET, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.EMPTY, CELL_TYPES.WALL],
+            [CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL, CELL_TYPES.WALL],
         ]
     }
 
