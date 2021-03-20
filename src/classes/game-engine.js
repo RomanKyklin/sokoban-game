@@ -13,7 +13,6 @@ export class GameEngine {
 
     rightAction() {
         this.levelsManager.toRight();
-        this.postGameActions()
     }
 
     leftAction() {

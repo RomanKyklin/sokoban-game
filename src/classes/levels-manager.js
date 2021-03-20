@@ -42,8 +42,8 @@ export class LevelsManager {
     go(direction) {
         const player = this.findPlayerPosition();
         this.currentLevelStructure[player.y][player.x] ^= CELL_TYPES.PLAYER_ON_EMPTY;
-        this.currentLevelStructure[player.y + direction.y][player.x + direction.x] |= CELL_TYPES.PLAYER_ON_EMPTY;
         this.currentLevelStructure[player.y + direction.y][player.x + direction] ^= CELL_TYPES.EMPTY;
+        this.currentLevelStructure[player.y + direction.y][player.x + direction.x] |= CELL_TYPES.PLAYER_ON_EMPTY;
         this.currentLevelStructure[player.y][player.x] |= CELL_TYPES.EMPTY;
     }
 
