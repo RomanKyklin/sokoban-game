@@ -29,8 +29,8 @@ export class LevelsManager {
     }
 
     findPlayerPosition() {
-        this.currentLevelStructure.forEach((row, x) => {
-            row.forEach((cell, y) => {
+        this.currentLevelStructure.forEach((row, y) => {
+            row.forEach((cell, x) => {
                 if (cell & CELL_TYPES.PLAYER) {
                     this.playerPosition = {x, y};
                 }
@@ -41,7 +41,10 @@ export class LevelsManager {
 
     go(direction) {
         const player = this.findPlayerPosition();
-        this.currentLevelStructure[player.x + direction.x][player.y + direction.y] = CELL_TYPES.PLAYER;
+        this.currentLevelStructure[player.y][player.x] ^= CELL_TYPES.PLAYER_ON_EMPTY;
+        this.currentLevelStructure[player.y + direction.y][player.x + direction.x] |= CELL_TYPES.PLAYER_ON_EMPTY;
+        this.currentLevelStructure[player.y + direction.y][player.x + direction] ^= CELL_TYPES.EMPTY;
+        this.currentLevelStructure[player.y][player.x] |= CELL_TYPES.EMPTY;
     }
 
     toRight() {
