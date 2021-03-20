@@ -1,7 +1,7 @@
 import {GAME_ENGINE_ACTIONS} from "./mediators/game-mediator.js";
 
 export class GameEngine {
-    constructor(playingField, levelsManager, mediator) {
+    constructor(levelsManager, mediator) {
         this.levelsManager = levelsManager;
         this.mediator = mediator;
     }

@@ -18,8 +18,12 @@ export class LevelsManager {
         return this.levelsStructure[this.currentLevelIndex + 1] != undefined;
     }
 
-    toRight() {
+    findPlayerPosition() {
+        this.currentLevelStructure.forEach(val => console.log());
+    }
 
+    toRight() {
+        this.findPlayerPosition();
     }
 
     toLeft() {
