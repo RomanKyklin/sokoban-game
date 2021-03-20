@@ -2,10 +2,8 @@ import {GAME_ENGINE_ACTIONS} from "./mediators/game-mediator.js";
 
 export class GameEngine {
     constructor(playingField, levelsManager, mediator) {
-        this.playingField = playingField;
         this.levelsManager = levelsManager;
         this.mediator = mediator;
-        this.startNewGameBtnId = 'start-new-game';
     }
 
     WIN_MESSAGE_TIMEOUT = 0;
@@ -13,18 +11,20 @@ export class GameEngine {
     NEXT_LEVEL_MESSAGE = 'Хотите перейти на следующий уровень ?';
     DO_NOT_HAVE_NEXT_LEVEL_MESSAGE = 'Следующий уровень отсутствует! Вы прошли финальный уровень.'
 
-    environments = [];
-
     rightAction() {
+        this.levelsManager.toRight();
     }
 
     leftAction() {
+        this.levelsManager.toLeft();
     }
 
-    upAction() {
+    topAction() {
+        this.levelsManager.toTop()
     }
 
     bottomAction() {
+        this.levelsManager.toBottom()
     }
 
     gameActions() {
@@ -47,7 +47,7 @@ export class GameEngine {
     initializeMediatorListeners() {
         this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_left, this.leftAction.bind(this));
         this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_right, this.rightAction.bind(this));
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_top, this.upAction.bind(this));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_top, this.topAction.bind(this));
         this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_bottom, this.bottomAction.bind(this));
     }
 
