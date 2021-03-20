@@ -1,11 +1,3 @@
-import CellTypes from "./cells/cell-types.js";
-import {Ground} from "./cells/bg-table-cells/ground.js";
-import {Environment} from "./cells/bg-table-cells/environment.js";
-import {SaturatedBox} from "./cells/bg-table-cells/saturated-box.js";
-import {BrownBox} from "./cells/bg-table-cells/brown-box.js";
-import {SaturatedPlayer} from "./cells/bg-table-cells/saturated-player.js";
-import {Player} from "./cells/bg-table-cells/player.js";
-
 export class LevelsManager {
     constructor(startLevelIndex = 0, levelsStructure = []) {
         this.levelsStructure = levelsStructure;

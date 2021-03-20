@@ -1,4 +1,3 @@
-import CellTypes from "./cells/cell-types.js";
 import {CELL_TYPES} from "./cells/cell-types.js";
 
 export class PlayingField {
@@ -32,29 +31,5 @@ export class PlayingField {
             this.getFirstLevelStructure(),
             this.getSecondLevelStructure()
         ]
-    }
-
-    isBox(element) {
-        return element.getType() === CellTypes.BOX_TYPE;
-    }
-
-    isBrownBox(element) {
-        return element.getType() === CellTypes.BROWN_BOX_TYPE;
-    }
-
-    isEnvironmentBox(element) {
-        return element.getType() === CellTypes.ENVIRONMENT_TYPE;
-    }
-
-    isGround(element) {
-        return element.getType() === CellTypes.GROUND_TYPE;
-    }
-
-    isSaturatedBox(element) {
-        return element.getType() === CellTypes.SATURATED_BOX_TYPE;
-    }
-
-    isPlayerSaturated(player) {
-        return player.getType() === CellTypes.SATURATED_PLAYER_TYPE;
     }
 }
