@@ -28,6 +28,25 @@ export class LevelsManager {
         return this.levelsStructure[this.currentLevelIndex + 1] != undefined;
     }
 
+    getElementByDirection(position, direction) {
+        return {
+            x: position.x + direction.x,
+            y: position.y + direction.y
+        };
+    }
+
+    canIGo(direction, fromPosition) {
+        const startPos = fromPosition || this.playerPosition;
+        const {x, y} = this.getElementByDirection(startPos, direction);
+        const elementByDirection = this.currentLevelStructure[y][x];
+
+        if (elementByDirection === CELL_TYPES.WALL) {
+            return false;
+        }
+
+        return true;
+    }
+
     findPlayerPosition() {
         this.currentLevelStructure.forEach((row, y) => {
             row.forEach((cell, x) => {
@@ -40,15 +59,28 @@ export class LevelsManager {
     }
 
     go(direction) {
-        const player = this.findPlayerPosition();
-        this.currentLevelStructure[player.y][player.x] ^= CELL_TYPES.PLAYER_ON_EMPTY;
-        this.currentLevelStructure[player.y + direction.y][player.x + direction] ^= CELL_TYPES.EMPTY;
-        this.currentLevelStructure[player.y + direction.y][player.x + direction.x] |= CELL_TYPES.PLAYER_ON_EMPTY;
-        this.currentLevelStructure[player.y][player.x] |= CELL_TYPES.EMPTY;
+        const {x: pX, y: pY} = this.findPlayerPosition();
+
+        if (!this.canIGo(direction)) return false;
+
+        const {x: dX, y: dY} = this.getElementByDirection(this.playerPosition, direction);
+        const {x: ddX, y: ddY} = this.getElementByDirection({x: dX, y: dY}, direction);
+
+        if (this.currentLevelStructure[dY][dX] === CELL_TYPES.BOX_ON_EMPTY) {
+            this.currentLevelStructure[pY][pX] ^= CELL_TYPES.PLAYER_ON_EMPTY;
+            this.currentLevelStructure[dY][dX] ^= CELL_TYPES.BOX_ON_EMPTY;
+            this.currentLevelStructure[dY][dX] |= CELL_TYPES.PLAYER_ON_EMPTY;
+            this.currentLevelStructure[pY][pX] |= CELL_TYPES.BOX_ON_EMPTY;
+        }
+
+        this.currentLevelStructure[pY][pX] ^= CELL_TYPES.PLAYER_ON_EMPTY;
+        this.currentLevelStructure[dY][dX] ^= CELL_TYPES.EMPTY;
+        this.currentLevelStructure[dY][dX] |= CELL_TYPES.PLAYER_ON_EMPTY;
+        this.currentLevelStructure[pY][pX] |= CELL_TYPES.EMPTY;
     }
 
     toRight() {
-       this.go(DIRECTIONS.RIGHT);
+        this.go(DIRECTIONS.RIGHT);
     }
 
     toLeft() {
