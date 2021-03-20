@@ -1,5 +1,12 @@
 import {CELL_TYPES} from "./cells/cell-types.js";
 
+const DIRECTIONS = {
+    LEFT: {x: -1, y: 0},
+    TOP: {x: 0, y: -1},
+    RIGHT: {x: 1, y: 0},
+    BOTTOM: {x: 0, y: 1}
+};
+
 export class LevelsManager {
     constructor(startLevelIndex = 0, levelsStructure = []) {
         this.levelsStructure = levelsStructure;
@@ -32,21 +39,25 @@ export class LevelsManager {
         return this.playerPosition;
     }
 
+    go(direction) {
+        const player = this.findPlayerPosition();
+        this.currentLevelStructure[player.x + direction.x][player.y + direction.y] = CELL_TYPES.PLAYER;
+    }
+
     toRight() {
-        this.findPlayerPosition();
-        console.log(this.playerPosition)
+       this.go(DIRECTIONS.RIGHT);
     }
 
     toLeft() {
-
+        this.go(DIRECTIONS.LEFT);
     }
 
     toTop() {
-
+        this.go(DIRECTIONS.TOP);
     }
 
     toBottom() {
-
+        this.go(DIRECTIONS.BOTTOM);
     }
 
     getNextLevel() {

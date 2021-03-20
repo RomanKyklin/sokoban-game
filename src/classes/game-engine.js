@@ -27,7 +27,7 @@ export class GameEngine {
         this.levelsManager.toBottom()
     }
 
-    gameActions() {
+    gameActions(actionFn) {
         this.postGameActions();
     }
 
@@ -45,10 +45,10 @@ export class GameEngine {
     }
 
     initializeMediatorListeners() {
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_left, this.leftAction.bind(this));
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_right, this.rightAction.bind(this));
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_top, this.topAction.bind(this));
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_bottom, this.bottomAction.bind(this));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_left, () => this.leftAction());
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_right, () => this.rightAction());
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_top, () => this.topAction());
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_bottom, () => this.bottomAction());
     }
 
     showWinMessage() {
