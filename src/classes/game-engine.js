@@ -28,7 +28,8 @@ export class GameEngine {
     }
 
     gameActions(actionFn) {
-        this.postGameActions();
+        actionFn.call(this);
+        this.mediator.publish(GAME_ENGINE_ACTIONS.rerender_game);
     }
 
     postGameActions() {
@@ -45,10 +46,10 @@ export class GameEngine {
     }
 
     initializeMediatorListeners() {
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_left, () => this.leftAction());
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_right, () => this.rightAction());
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_top, () => this.topAction());
-        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_bottom, () => this.bottomAction());
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_left, () => this.gameActions(this.leftAction));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_right, () => this.gameActions(this.rightAction));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_top, () => this.gameActions(this.topAction));
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.on_bottom, () => this.gameActions(this.bottomAction));
     }
 
     showWinMessage() {
