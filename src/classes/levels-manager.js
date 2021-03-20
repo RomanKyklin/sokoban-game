@@ -18,6 +18,22 @@ export class LevelsManager {
         return this.levelsStructure[this.currentLevelIndex + 1] != undefined;
     }
 
+    toRight() {
+
+    }
+
+    toLeft() {
+
+    }
+
+    toTop() {
+
+    }
+
+    toBottom() {
+
+    }
+
     getNextLevel() {
         if (!this.hasNextLevel()) {
             throw new Error('Next level doesnt exists');
