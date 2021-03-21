@@ -11,6 +11,10 @@
     justify-content: center;
 }
 
+.game-panel-cell {
+    cursor: pointer;
+}
+
 .main {
     width: 500px;
     height: 500px;

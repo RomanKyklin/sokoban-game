@@ -1,16 +1,16 @@
 import {GAME_ENGINE_ACTIONS} from "../mediators/game-mediator.js";
-import { CELL_TYPES as CT } from '../cells/cell-types.js';
+import {CELL_TYPES as CT} from '../cells/cell-types.js';
 
 
 export class BgTableRenderer {
     SKIN_MAP = {
-        [CT.EMPTY]: '<td class="game__table__td game__table__td--ground"></td>',
-        [CT.WALL]: '<td class="game__table__td game__table__td--box"></td>',
-        [CT.TARGET]: '<td id="default-environment-place" class="game__table__td game__table__td--environment"></td>',
-        [CT.BOX_ON_EMPTY]: '<td id="default-brown-box-place" class="game__table__td game__table__td--brown-box"></td>',
-        [CT.BOX_ON_TARGET]: '<td class="game__table__td game__table__td--green-ground"></td>',
-        [CT.PLAYER_ON_EMPTY]: '<td id="default-player-place" class="game__table__td game__table__td--ground game__table__td--player game__table__td--player-default"></td>',
-        [CT.PLAYER_ON_TARGET]:'<td id="default-player-place" class="game__table__td game__table__td--ground game__table__td--player game__table__td--player-default saturate"></td>'
+        [CT.EMPTY]: 'game__table__td game__table__td--ground',
+        [CT.WALL]: 'game__table__td game__table__td--box',
+        [CT.TARGET]: 'game__table__td game__table__td--environment',
+        [CT.BOX_ON_EMPTY]: 'game__table__td game__table__td--brown-box',
+        [CT.BOX_ON_TARGET]: 'game__table__td game__table__td--green-ground',
+        [CT.PLAYER_ON_EMPTY]: 'game__table__td game__table__td--ground game__table__td--player game__table__td--player-default',
+        [CT.PLAYER_ON_TARGET]: 'game__table__td game__table__td--ground game__table__td--player game__table__td--player-default saturate'
     }
 
     constructor(rootElementSelector, levelsManager, mediator) {
@@ -55,7 +55,7 @@ export class BgTableRenderer {
                     <table class="game__table">
                     ${this.currentLevelStructure.map(val => {
                                         return `<tr class="game__table__tr">
-                                                             ${val.map(val => this.SKIN_MAP[val]).join('')}
+                                                             ${val.map(val => `<td class="${this.SKIN_MAP[val]}"></td>`).join('')}
                                         </tr>`
         }).join('')}
                     </table>
