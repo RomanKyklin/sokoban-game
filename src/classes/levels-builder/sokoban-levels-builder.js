@@ -6,6 +6,7 @@ export class SokobanLevelsBuilder {
         renderer
     ) {
         this.renderer = renderer;
+        this.currentDroppable = null;
     }
 
     onMouseDown(event) {
@@ -23,8 +24,36 @@ export class SokobanLevelsBuilder {
 
         moveAt(event.pageX, event.pageY);
 
-        function onMouseMove(event) {
+        const onMouseMove = (event) => {
             moveAt(event.pageX, event.pageY);
+
+            this.hidden = true;
+            let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+            this.hidden = false;
+
+            if (!elemBelow) return;
+
+            let droppableBelow = elemBelow.closest('.droppable');
+
+            if (this.currentDroppable != droppableBelow) {
+                if (this.currentDroppable) {
+                    // логика обработки процесса "вылета" из droppable (удаляем подсветку)
+                    leaveDroppable(this.currentDroppable);
+                }
+                this.currentDroppable = droppableBelow;
+                if (this.currentDroppable) {
+                    // логика обработки процесса, когда мы "влетаем" в элемент droppable
+                    enterDroppable(this.currentDroppable);
+                }
+            }
+
+            function enterDroppable(elem) {
+                elem.style.background = 'pink';
+            }
+
+            function leaveDroppable(elem) {
+                elem.style.background = '';
+            }
         }
 
         // (3) перемещать по экрану
