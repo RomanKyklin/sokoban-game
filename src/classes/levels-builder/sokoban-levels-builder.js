@@ -7,7 +7,9 @@ export class SokobanLevelsBuilder {
 
     getGamePanelHtml() {
         return `
-        <h1>panel blueprint</h1>
+            <div class="game-panel-cells-wrapper">
+                
+            </div>
         `
     }
 

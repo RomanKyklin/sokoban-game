@@ -6,7 +6,7 @@
     padding: 0;
 }
 
-.game-panel-wrapper {
+.game-panel-wrapper, .game-panel-cells-wrapper {
     display: flex;
     justify-content: center;
 }
