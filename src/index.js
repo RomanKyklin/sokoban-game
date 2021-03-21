@@ -5,6 +5,8 @@ import {EventLoop} from "./classes/event-loop.js";
 import {PlayingField} from "./classes/playing-field.js";
 import {GameMediator} from "./classes/mediators/game-mediator.js";
 import {LevelsManager} from "./classes/levels-manager.js";
+import {SokobanLevelsBuilder} from "./classes/levels-builder/sokoban-levels-builder.js";
+import {LevelsBuilderRenderer} from "./classes/renderers/levels-builder-renderer.js";
 
 (function game(document) {
     const playingField = new PlayingField();
@@ -24,7 +26,16 @@ import {LevelsManager} from "./classes/levels-manager.js";
 
     const eventLoop = new EventLoop(mediator);
 
+    const levelsBuilder = new SokobanLevelsBuilder(
+        new LevelsBuilderRenderer(
+            '#builder',
+            levelsManager,
+            mediator
+        )
+    );
+
     gameRenderer.render();
     eventLoop.initNavigationListeners();
     gameEngine.run();
+    levelsBuilder.run();
 })(document)

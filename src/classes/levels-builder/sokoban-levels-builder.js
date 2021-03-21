@@ -1,4 +1,11 @@
 export class SokobanLevelsBuilder {
-    constructor() {
+    constructor(
+        renderer
+    ) {
+        this.renderer = renderer;
+    }
+
+    run() {
+        this.renderer.render();
     }
 }

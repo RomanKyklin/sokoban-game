@@ -23,7 +23,6 @@ export class LevelsManager {
                 if (cell === CELL_TYPES.TARGET) isWin = false;
             })
         });
-
         return isWin;
     }
 
