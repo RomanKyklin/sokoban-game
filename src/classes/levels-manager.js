@@ -38,9 +38,12 @@ export class LevelsManager {
     canIGo(direction, fromPosition) {
         const startPos = fromPosition || this.playerPosition;
         const {x, y} = this.getElementByDirection(startPos, direction);
+        const {x: nX, y: nY} = this.getElementByDirection({x, y}, direction);
         const elementByDirection = this.currentLevelStructure[y][x];
+        const nextElementByDirection = this.currentLevelStructure[nY][nX];
 
-        if (elementByDirection === CELL_TYPES.WALL) {
+        if (elementByDirection === CELL_TYPES.WALL
+            || (elementByDirection & CELL_TYPES.BOX && nextElementByDirection === CELL_TYPES.WALL)) {
             return false;
         }
 
