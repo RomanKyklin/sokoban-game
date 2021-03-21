@@ -69,7 +69,7 @@ export class LevelsManager {
         const {x: dX, y: dY} = this.getElementByDirection(this.playerPosition, direction);
         const {x: ddX, y: ddY} = this.getElementByDirection({x: dX, y: dY}, direction);
 
-        if (this.currentLevelStructure[dY][dX] === CELL_TYPES.BOX_ON_EMPTY) {
+        if (this.currentLevelStructure[dY][dX] & CELL_TYPES.BOX) {
             this.currentLevelStructure[dY][dX] ^= CELL_TYPES.BOX;
             this.currentLevelStructure[ddY][ddX] |= CELL_TYPES.BOX;
         }
