@@ -45,9 +45,16 @@ export class LevelsManager {
         };
     }
 
+    isInRange(x, y) {
+        return y > 0 && y < this.currentLevelStructure.length && x > 0 && x < this.currentLevelStructure[y].length;
+    }
+
     canIGo(direction, fromPosition) {
         const startPos = fromPosition || this.playerPosition;
         const {x, y} = this.getElementByDirection(startPos, direction);
+
+        if (!this.isInRange(x, y)) return false;
+
         const {x: nX, y: nY} = this.getElementByDirection({x, y}, direction);
         const elementByDirection = this.currentLevelStructure[y][x];
         const nextElementByDirection = this.currentLevelStructure[nY][nX];
