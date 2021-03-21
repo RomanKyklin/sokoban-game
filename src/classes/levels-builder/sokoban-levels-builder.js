@@ -8,6 +8,44 @@ export class SokobanLevelsBuilder {
         this.renderer = renderer;
     }
 
+    onMouseDown(event) {
+        let shiftX = event.clientX - this.getBoundingClientRect().left;
+        let shiftY = event.clientY - this.getBoundingClientRect().top;
+
+        this.style.position = 'absolute';
+        this.style.zIndex = 1000;
+        document.body.append(this)
+
+        const moveAt = (pageX, pageY) => {
+            this.style.left = pageX - shiftX + 'px';
+            this.style.top = pageY - shiftY + 'px';
+        }
+
+        moveAt(event.pageX, event.pageY);
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+
+        // (3) перемещать по экрану
+        document.addEventListener('mousemove', onMouseMove);
+
+        // (4) положить мяч, удалить более ненужные обработчики событий
+        this.onmouseup = function () {
+            document.removeEventListener('mousemove', onMouseMove);
+            this.onmouseup = null;
+        };
+
+        this.ondragstart = function () {
+            return false;
+        };
+    }
+
+    initializeDOMListeners() {
+        document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.TARGET]}`)[0]
+            .addEventListener('mousedown', this.onMouseDown);
+    }
+
     getGamePanelHtml() {
         return `
             <h2>Панель элементов</h2>
@@ -29,5 +67,6 @@ export class SokobanLevelsBuilder {
 
     run() {
         this.render();
+        this.initializeDOMListeners();
     }
 }

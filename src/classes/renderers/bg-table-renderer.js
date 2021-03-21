@@ -17,8 +17,13 @@ export class BgTableRenderer {
         this.rootElementSelector = rootElementSelector;
         this.levelsManager = levelsManager;
         this.mediator = mediator;
+        this.additionalCellClasses = '';
         this.initializeMediatorListeners();
         this.initializeLevelStructure();
+    }
+
+    setAdditionalCellClasses(...classes) {
+        this.additionalCellClasses = classes.join(' ');
     }
 
     initializeLevelStructure() {
@@ -54,8 +59,8 @@ export class BgTableRenderer {
                 <section class="game">
                     <table class="game__table">
                     ${this.currentLevelStructure.map(val => {
-                                        return `<tr class="game__table__tr">
-                                                             ${val.map(val => `<td class="${this.SKIN_MAP[val]}"></td>`).join('')}
+            return `<tr class="game__table__tr">
+                      ${val.map(val => `<td class="${this.SKIN_MAP[val]} ${this.additionalCellClasses}"></td>`).join('')}
                                         </tr>`
         }).join('')}
                     </table>
