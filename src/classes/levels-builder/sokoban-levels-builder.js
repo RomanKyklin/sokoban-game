@@ -44,6 +44,12 @@ export class SokobanLevelsBuilder {
     initializeDOMListeners() {
         document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.TARGET]}`)[0]
             .addEventListener('mousedown', this.onMouseDown);
+        document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.WALL]}`)[0]
+            .addEventListener('mousedown', this.onMouseDown);
+        document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.BOX_ON_EMPTY]}`)[0]
+            .addEventListener('mousedown', this.onMouseDown);
+        document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.EMPTY]}`)[0]
+            .addEventListener('mousedown', this.onMouseDown);
     }
 
     getGamePanelHtml() {
