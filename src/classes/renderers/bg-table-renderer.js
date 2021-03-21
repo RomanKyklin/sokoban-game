@@ -18,6 +18,7 @@ export class BgTableRenderer {
         this.levelsManager = levelsManager;
         this.mediator = mediator;
         this.initializeMediatorListeners();
+        this.initializeLevelStructure();
     }
 
     initializeLevelStructure() {
@@ -68,7 +69,6 @@ export class BgTableRenderer {
         if (!rootElement) {
             throw new Error('root element was not found!');
         }
-        this.initializeLevelStructure();
         rootElement.innerHTML = this.getHtml();
     }
 }
