@@ -16,8 +16,19 @@ export class LevelsManager {
         this.playerPosition = {};
     }
 
+    isWin() {
+        let isWin = true;
+        this.currentLevelStructure.forEach(row => {
+            row.forEach(cell => {
+                if (cell === CELL_TYPES.TARGET) isWin = false;
+            })
+        });
+
+        return isWin;
+    }
+
     getCurrentLevel() {
-        return this.levelsStructure[this.currentLevelIndex + 1];
+        return this.levelsStructure[this.currentLevelIndex];
     }
 
     getCurrentLevelStructure() {

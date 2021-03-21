@@ -29,12 +29,16 @@ export class GameEngine {
 
     gameActions(actionFn) {
         actionFn.call(this);
-        this.mediator.publish(GAME_ENGINE_ACTIONS.rerender_game);
+        this.postGameActions();
     }
 
     postGameActions() {
         this.startNewGameListener();
         this.mediator.publish(GAME_ENGINE_ACTIONS.rerender_game);
+
+        if (this.levelsManager.isWin()) {
+            this.win();
+        }
     }
 
     startNewGameListener() {
