@@ -17,7 +17,7 @@ export class LevelsManager {
     }
 
     getCurrentLevel() {
-        return this.levelsStructure[this.currentLevelIndex];
+        return this.levelsStructure[this.currentLevelIndex + 1];
     }
 
     getCurrentLevelStructure() {
@@ -78,10 +78,8 @@ export class LevelsManager {
             this.currentLevelStructure[dY][dX] ^= CELL_TYPES.BOX_ON_EMPTY;
         }
 
-        this.currentLevelStructure[pY][pX] ^= CELL_TYPES.PLAYER_ON_EMPTY;
-        this.currentLevelStructure[dY][dX] ^= CELL_TYPES.EMPTY;
-        this.currentLevelStructure[dY][dX] |= CELL_TYPES.PLAYER_ON_EMPTY;
-        this.currentLevelStructure[pY][pX] |= CELL_TYPES.EMPTY;
+        this.currentLevelStructure[pY][pX] ^= CELL_TYPES.PLAYER;
+        this.currentLevelStructure[dY][dX] |= CELL_TYPES.PLAYER;
     }
 
     toRight() {
