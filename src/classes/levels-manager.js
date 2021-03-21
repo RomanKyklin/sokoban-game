@@ -67,8 +67,12 @@ export class LevelsManager {
         const {x: ddX, y: ddY} = this.getElementByDirection({x: dX, y: dY}, direction);
 
         if (this.currentLevelStructure[dY][dX] === CELL_TYPES.BOX_ON_EMPTY) {
+            this.currentLevelStructure[ddY][ddX] === CELL_TYPES.TARGET ?
+                this.currentLevelStructure[ddY][ddX] |= CELL_TYPES.BOX_ON_TARGET :
+                this.currentLevelStructure[ddY][ddX] |= CELL_TYPES.BOX_ON_EMPTY;
+
+
             this.currentLevelStructure[dY][dX] ^= CELL_TYPES.BOX_ON_EMPTY;
-            this.currentLevelStructure[ddY][ddX] |= CELL_TYPES.BOX_ON_EMPTY;
         }
 
         this.currentLevelStructure[pY][pX] ^= CELL_TYPES.PLAYER_ON_EMPTY;
