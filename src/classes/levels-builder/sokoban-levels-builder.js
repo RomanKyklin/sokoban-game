@@ -7,14 +7,15 @@ export class SokobanLevelsBuilder {
 
     getGamePanelHtml() {
         return `
-        <h1>darova</h1>
+        <h1>panel blueprint</h1>
         `
     }
 
     render() {
         const gameHtml = this.renderer.getHtml();
         const gamePanelHtml = this.getGamePanelHtml();
-        document.getElementById(this.renderer.rootElementSelector).innerHTML = gameHtml;
+        document.querySelector(this.renderer.rootElementSelector).innerHTML = gameHtml;
+        document.querySelector('#game-panel').innerHTML += gamePanelHtml;
     }
 
     run() {
