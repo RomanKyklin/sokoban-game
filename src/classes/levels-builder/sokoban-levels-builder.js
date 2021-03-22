@@ -1,6 +1,5 @@
 import {CELL_TYPES} from "../cells/cell-types.js";
 
-
 export class SokobanLevelsBuilder {
     constructor(
         renderer
@@ -10,16 +9,17 @@ export class SokobanLevelsBuilder {
     }
 
     onMouseDown(event) {
-        let shiftX = event.clientX - this.getBoundingClientRect().left;
-        let shiftY = event.clientY - this.getBoundingClientRect().top;
+        const element = event.target;
+        let shiftX = event.clientX - element.getBoundingClientRect().left;
+        let shiftY = event.clientY - element.getBoundingClientRect().top;
 
-        this.style.position = 'absolute';
-        this.style.zIndex = 1000;
-        document.body.append(this)
+        element.style.position = 'absolute';
+        element.style.zIndex = 1000;
+        document.body.append(element)
 
         const moveAt = (pageX, pageY) => {
-            this.style.left = pageX - shiftX + 'px';
-            this.style.top = pageY - shiftY + 'px';
+            element.style.left = pageX - shiftX + 'px';
+            element.style.top = pageY - shiftY + 'px';
         }
 
         moveAt(event.pageX, event.pageY);
@@ -42,6 +42,7 @@ export class SokobanLevelsBuilder {
                 }
                 this.currentDroppable = droppableBelow;
                 if (this.currentDroppable) {
+                    // console.log(this.currentDroppable.classList.contains(this.renderer.SKIN_MAP[CELL_TYPES.PLAYER]))
                     // логика обработки процесса, когда мы "влетаем" в элемент droppable
                     enterDroppable(this.currentDroppable);
                 }
@@ -57,28 +58,28 @@ export class SokobanLevelsBuilder {
         }
 
         // (3) перемещать по экрану
-        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mousemove', onMouseMove.bind(this));
 
         // (4) положить мяч, удалить более ненужные обработчики событий
-        this.onmouseup = function () {
+        element.onmouseup = function () {
             document.removeEventListener('mousemove', onMouseMove);
-            this.onmouseup = null;
+            element.onmouseup = null;
         };
 
-        this.ondragstart = function () {
+        element.ondragstart = function () {
             return false;
         };
     }
 
     initializeDOMListeners() {
         document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.TARGET]}`)[0]
-            .addEventListener('mousedown', this.onMouseDown);
+            .addEventListener('mousedown', this.onMouseDown.bind(this));
         document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.WALL]}`)[0]
-            .addEventListener('mousedown', this.onMouseDown);
+            .addEventListener('mousedown', this.onMouseDown.bind(this));
         document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.BOX_ON_EMPTY]}`)[0]
-            .addEventListener('mousedown', this.onMouseDown);
+            .addEventListener('mousedown', this.onMouseDown.bind(this));
         document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.EMPTY]}`)[0]
-            .addEventListener('mousedown', this.onMouseDown);
+            .addEventListener('mousedown', this.onMouseDown.bind(this));
     }
 
     getGamePanelHtml() {
