@@ -61,6 +61,11 @@ export class SokobanLevelsBuilder {
 
         // (4) положить мяч, удалить более ненужные обработчики событий
         element.onmouseup = () => {
+            this.renderer.levelsManager.currentLevelStructure.forEach((row, y) => {
+                row.forEach((cell, x) => {
+
+                })
+            })
             document.removeEventListener('mousemove', onMouseMove);
             element.onmouseup = null;
         };

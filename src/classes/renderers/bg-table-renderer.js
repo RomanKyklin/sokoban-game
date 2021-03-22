@@ -47,9 +47,9 @@ export class BgTableRenderer {
     }
 
     get cellsTemplate() {
-        return this.currentLevelStructure.map(val => {
+        return this.currentLevelStructure.map((row, y) => {
             return `<tr class="game__table__tr">
-                       ${val.map(val => `<td class="${this.SKIN_MAP[val]} ${this.additionalCellClasses}"></td>`).join('')}
+                       ${row.map((cell, x) => `<td data-x="${x}" data-y="${y}" class="${this.SKIN_MAP[cell]} ${this.additionalCellClasses}"></td>`).join('')}
                     </tr>`
         }).join('')
     }
