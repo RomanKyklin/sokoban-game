@@ -65,7 +65,8 @@ export class SokobanLevelsBuilder {
                 const {x: eX, y: eY} = this.currentDroppable.dataset;
                 const {cellType} = element.dataset;
                 this.renderer.levelsManager.currentLevelStructure[eY][eX] = Number(cellType);
-                this.render()
+                element.remove();
+                this.run()
             }
             document.removeEventListener('mousemove', onMouseMove);
             element.onmouseup = null;
