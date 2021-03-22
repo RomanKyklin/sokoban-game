@@ -27,9 +27,9 @@ export class SokobanLevelsBuilder {
         const onMouseMove = (event) => {
             moveAt(event.pageX, event.pageY);
 
-            this.hidden = true;
+            element.hidden = true;
             let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-            this.hidden = false;
+            element.hidden = false;
 
             if (!elemBelow) return;
 
@@ -42,7 +42,6 @@ export class SokobanLevelsBuilder {
                 }
                 this.currentDroppable = droppableBelow;
                 if (this.currentDroppable) {
-                    // console.log(this.currentDroppable.classList.contains(this.renderer.SKIN_MAP[CELL_TYPES.PLAYER]))
                     // логика обработки процесса, когда мы "влетаем" в элемент droppable
                     enterDroppable(this.currentDroppable);
                 }
@@ -58,10 +57,10 @@ export class SokobanLevelsBuilder {
         }
 
         // (3) перемещать по экрану
-        document.addEventListener('mousemove', onMouseMove.bind(this));
+        document.addEventListener('mousemove', onMouseMove);
 
         // (4) положить мяч, удалить более ненужные обработчики событий
-        element.onmouseup = function () {
+        element.onmouseup = () => {
             document.removeEventListener('mousemove', onMouseMove);
             element.onmouseup = null;
         };
