@@ -46,6 +46,14 @@ export class BgTableRenderer {
         this.render();
     }
 
+    get cellsTemplate() {
+        return this.currentLevelStructure.map(val => {
+            return `<tr class="game__table__tr">
+                       ${val.map(val => `<td class="${this.SKIN_MAP[val]} ${this.additionalCellClasses}"></td>`).join('')}
+                    </tr>`
+        }).join('')
+    }
+
     getHtml() {
         return `<div class="main">
                     <header class="header">
@@ -58,11 +66,7 @@ export class BgTableRenderer {
         
                 <section class="game">
                     <table class="game__table">
-                    ${this.currentLevelStructure.map(val => {
-            return `<tr class="game__table__tr">
-                      ${val.map(val => `<td class="${this.SKIN_MAP[val]} ${this.additionalCellClasses}"></td>`).join('')}
-                                        </tr>`
-        }).join('')}
+                        ${this.cellsTemplate}
                     </table>
                 </section>
         </div>`
