@@ -7,6 +7,7 @@ import {GameMediator} from "./classes/mediators/game-mediator.js";
 import {LevelsManager} from "./classes/levels-manager.js";
 import {SokobanLevelsBuilder} from "./classes/levels-builder/sokoban-levels-builder.js";
 import {LevelsBuilderRenderer} from "./classes/renderers/levels-builder-renderer.js";
+import {LevelsBuilderPlayingField} from "../levels-builder-playing-field.js";
 
 (function game(document) {
     const playingField = new PlayingField();
@@ -29,7 +30,7 @@ import {LevelsBuilderRenderer} from "./classes/renderers/levels-builder-renderer
     const levelsBuilder = new SokobanLevelsBuilder(
         new LevelsBuilderRenderer(
             '#builder',
-            levelsManager,
+            new LevelsManager(0, (new LevelsBuilderPlayingField()).getAllLevels()),
             mediator
         )
     );
