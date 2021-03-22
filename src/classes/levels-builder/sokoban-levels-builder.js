@@ -61,11 +61,12 @@ export class SokobanLevelsBuilder {
 
         // (4) положить мяч, удалить более ненужные обработчики событий
         element.onmouseup = () => {
-            this.renderer.levelsManager.currentLevelStructure.forEach((row, y) => {
-                row.forEach((cell, x) => {
-
-                })
-            })
+            if (this.currentDroppable) {
+                const {x: eX, y: eY} = this.currentDroppable.dataset;
+                const {cellType} = element.dataset;
+                this.renderer.levelsManager.currentLevelStructure[eY][eX] = Number(cellType);
+                this.render()
+            }
             document.removeEventListener('mousemove', onMouseMove);
             element.onmouseup = null;
         };
@@ -90,10 +91,10 @@ export class SokobanLevelsBuilder {
         return `
             <h2>Панель элементов</h2>
             <div class="game-panel-cells-wrapper">
-                <div class="game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.TARGET]}"></div>
-                <div class="game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.WALL]}"></div>
-                <div class="game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.BOX_ON_EMPTY]}"></div>
-                <div class="game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.EMPTY]}"></div>
+                <div data-cell-type=${CELL_TYPES.TARGET} class="game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.TARGET]}"></div>
+                <div data-cell-type=${CELL_TYPES.WALL} class="game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.WALL]}"></div>
+                <div data-cell-type=${CELL_TYPES.BOX_ON_EMPTY} class="game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.BOX_ON_EMPTY]}"></div>
+                <div data-cell-type=${CELL_TYPES.EMPTY} class="game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.EMPTY]}"></div>
             </div>
         `
     }
@@ -102,7 +103,7 @@ export class SokobanLevelsBuilder {
         const gameHtml = this.renderer.getHtml();
         const gamePanelHtml = this.getGamePanelHtml();
         document.querySelector(this.renderer.rootElementSelector).innerHTML = gameHtml;
-        document.querySelector('#game-panel').innerHTML += gamePanelHtml;
+        document.querySelector('#game-panel').innerHTML = gamePanelHtml;
     }
 
     run() {
