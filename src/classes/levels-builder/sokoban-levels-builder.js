@@ -91,7 +91,19 @@ export class SokobanLevelsBuilder {
         })
     }
 
+    saveLevel() {
+        localStorage.setItem(
+            this.levelsBuilderManager.currentLevelIndex,
+            JSON.stringify(this.levelsBuilderManager.currentLevelStructure)
+        );
+    }
+
+    initializeMediatorSubscriptions() {
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.levels_builder_save, () => this.saveLevel());
+    }
+
     run() {
         this.initializeDOMListeners();
+        this.initializeMediatorSubscriptions();
     }
 }

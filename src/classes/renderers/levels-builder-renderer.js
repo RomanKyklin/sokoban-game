@@ -7,6 +7,7 @@ export class LevelsBuilderRenderer extends BgTableRenderer {
         super(rootElementSelector, levelsManager, mediator);
         this.additionalCellClasses = 'droppable';
         this.gamePanelSelector = gamePanelSelector;
+        this.saveBtnID = 'saveNewLevelTemplate';
         this.initializeMediatorListeners();
     }
 
@@ -14,11 +15,17 @@ export class LevelsBuilderRenderer extends BgTableRenderer {
         this.mediator.subscribe(GAME_ENGINE_ACTIONS.rerender_builder, () => this.renderAll());
     }
 
+    initializeDOMListeners() {
+        document.querySelector(`#${this.saveBtnID}`).addEventListener('click', () => {
+            this.mediator.publish(GAME_ENGINE_ACTIONS.levels_builder_save)
+        })
+    }
+
     get headerTemplate() {
         return `<header class="header">
                         <nav class="header__nav">
                             <ul class="header__ul">
-                                <li class="header__li" id="saveNewLevelTemplate">Сохранить</li>
+                                <li class="header__li" id="${this.saveBtnID}">Сохранить</li>
                             </ul>
                         </nav>
                     </header>`;
@@ -52,5 +59,6 @@ export class LevelsBuilderRenderer extends BgTableRenderer {
     renderAll() {
         this.render();
         this.renderGamePanel();
+        this.initializeDOMListeners();
     }
 }

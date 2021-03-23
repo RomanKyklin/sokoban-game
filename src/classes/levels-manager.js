@@ -27,7 +27,8 @@ export class LevelsManager {
     }
 
     getCurrentLevel() {
-        return this.levelsStructure[this.currentLevelIndex];
+        const levelInCash = localStorage.getItem(String(this.currentLevelIndex));
+        return levelInCash ? JSON.parse(levelInCash) : this.levelsStructure[this.currentLevelIndex];
     }
 
     getCurrentLevelStructure() {
