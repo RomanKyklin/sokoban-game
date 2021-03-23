@@ -34,8 +34,9 @@ export class SokobanLevelsBuilder {
             if (!elemBelow) return;
 
             let droppableBelow = elemBelow.closest('.droppable');
+            const {cellType} = elemBelow.dataset;
 
-            if (this.currentDroppable != droppableBelow) {
+            if ((cellType && !(Number(cellType) & CELL_TYPES.PLAYER)) && this.currentDroppable != droppableBelow) {
                 if (this.currentDroppable) {
                     // логика обработки процесса "вылета" из droppable (удаляем подсветку)
                     leaveDroppable(this.currentDroppable);
