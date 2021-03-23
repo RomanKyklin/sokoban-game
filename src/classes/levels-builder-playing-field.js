@@ -1,5 +1,5 @@
-import {PlayingField} from "./src/classes/playing-field.js";
-import {CELL_TYPES} from "./src/classes/cells/cell-types.js";
+import {PlayingField} from "./playing-field.js";
+import {CELL_TYPES} from "./cells/cell-types.js";
 
 export class LevelsBuilderPlayingField extends PlayingField {
     constructor() {

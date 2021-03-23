@@ -1,14 +1,17 @@
 import {BgTableRenderer} from "./bg-table-renderer.js";
 import {CELL_TYPES} from "../cells/cell-types.js";
+import {GAME_ENGINE_ACTIONS} from "../mediators/game-mediator.js";
 
 export class LevelsBuilderRenderer extends BgTableRenderer {
     constructor(rootElementSelector, levelsManager, mediator, gamePanelSelector) {
         super(rootElementSelector, levelsManager, mediator);
         this.additionalCellClasses = 'droppable';
         this.gamePanelSelector = gamePanelSelector;
+        this.initializeMediatorListeners();
     }
 
     initializeMediatorListeners() {
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.rerender_builder, () => this.renderAll());
     }
 
     get headerTemplate() {

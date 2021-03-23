@@ -1,10 +1,13 @@
 import {CELL_TYPES} from "../cells/cell-types.js";
+import {GAME_ENGINE_ACTIONS} from "../mediators/game-mediator.js";
 
 export class SokobanLevelsBuilder {
     constructor(
-        renderer
+        renderer,
+        mediator
     ) {
         this.renderer = renderer;
+        this.mediator = mediator;
         this.currentDroppable = null;
     }
 
@@ -67,6 +70,7 @@ export class SokobanLevelsBuilder {
                 const {cellType} = element.dataset;
                 this.renderer.levelsManager.currentLevelStructure[eY][eX] = Number(cellType);
                 element.remove();
+                this.mediator.publish(GAME_ENGINE_ACTIONS.rerender_builder);
                 this.run()
             }
             document.removeEventListener('mousemove', onMouseMove);
