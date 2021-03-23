@@ -31,7 +31,8 @@ import {LevelsBuilderPlayingField} from "../levels-builder-playing-field.js";
         new LevelsBuilderRenderer(
             '#builder',
             new LevelsManager(0, (new LevelsBuilderPlayingField()).getAllLevels()),
-            mediator
+            mediator,
+            '#game-panel'
         )
     );
 
