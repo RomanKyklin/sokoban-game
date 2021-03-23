@@ -27,16 +27,16 @@ import {LevelsBuilderPlayingField} from "../levels-builder-playing-field.js";
 
     const eventLoop = new EventLoop(mediator);
 
-    const levelsBuilder = new SokobanLevelsBuilder(
-        new LevelsBuilderRenderer(
-            '#builder',
-            new LevelsManager(0, (new LevelsBuilderPlayingField()).getAllLevels()),
-            mediator,
-            '#game-panel'
-        )
+    const levelsBuilderGameRenderer = new LevelsBuilderRenderer(
+        '#builder',
+        new LevelsManager(0, (new LevelsBuilderPlayingField()).getAllLevels()),
+        mediator,
+        '#game-panel'
     );
+    const levelsBuilder = new SokobanLevelsBuilder(levelsBuilderGameRenderer);
 
     gameRenderer.render();
+    levelsBuilderGameRenderer.renderAll();
     eventLoop.initNavigationListeners();
     gameEngine.run();
     levelsBuilder.run();
