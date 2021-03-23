@@ -20,7 +20,7 @@ export class LevelsManager {
         let isWin = true;
         this.currentLevelStructure.forEach(row => {
             row.forEach(cell => {
-                if (cell === CELL_TYPES.TARGET) isWin = false;
+                if ((cell & CELL_TYPES.TARGET) && !(cell & CELL_TYPES.BOX)) isWin = false;
             })
         });
         return isWin;
