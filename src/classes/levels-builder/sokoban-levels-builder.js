@@ -3,11 +3,13 @@ import {GAME_ENGINE_ACTIONS} from "../mediators/game-mediator.js";
 
 export class SokobanLevelsBuilder {
     constructor(
-        renderer,
-        mediator
+        mediator,
+        levelsBuilderManager,
+        elementSkins = []
     ) {
-        this.renderer = renderer;
         this.mediator = mediator;
+        this.levelsBuilderManager = levelsBuilderManager;
+        this.elementSkins = elementSkins;
         this.currentDroppable = null;
     }
 
@@ -68,7 +70,7 @@ export class SokobanLevelsBuilder {
             if (this.currentDroppable) {
                 const {x: eX, y: eY} = this.currentDroppable.dataset;
                 const {cellType} = element.dataset;
-                this.renderer.levelsManager.currentLevelStructure[eY][eX] = Number(cellType);
+                this.levelsBuilderManager.currentLevelStructure[eY][eX] = Number(cellType);
                 element.remove();
                 this.mediator.publish(GAME_ENGINE_ACTIONS.rerender_builder);
                 this.run()
@@ -83,14 +85,10 @@ export class SokobanLevelsBuilder {
     }
 
     initializeDOMListeners() {
-        document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.TARGET]}`)[0]
-            .addEventListener('mousedown', this.onMouseDown.bind(this));
-        document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.WALL]}`)[0]
-            .addEventListener('mousedown', this.onMouseDown.bind(this));
-        document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.BOX_ON_EMPTY]}`)[0]
-            .addEventListener('mousedown', this.onMouseDown.bind(this));
-        document.getElementsByClassName(`game-panel-cell ${this.renderer.SKIN_MAP[CELL_TYPES.EMPTY]}`)[0]
-            .addEventListener('mousedown', this.onMouseDown.bind(this));
+        this.elementSkins.forEach(skin => {
+            document.getElementsByClassName(`game-panel-cell ${skin}`)[0]
+                .addEventListener('mousedown', this.onMouseDown.bind(this));
+        })
     }
 
     run() {

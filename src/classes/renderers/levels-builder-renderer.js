@@ -36,6 +36,15 @@ export class LevelsBuilderRenderer extends BgTableRenderer {
         `
     }
 
+    get elementSkins() {
+        return [
+            this.SKIN_MAP[CELL_TYPES.TARGET],
+            this.SKIN_MAP[CELL_TYPES.WALL],
+            this.SKIN_MAP[CELL_TYPES.BOX_ON_EMPTY],
+            this.SKIN_MAP[CELL_TYPES.EMPTY]
+        ]
+    }
+
     renderGamePanel() {
         document.querySelector(this.gamePanelSelector).innerHTML = this.gamePanelTemplate;
     }
