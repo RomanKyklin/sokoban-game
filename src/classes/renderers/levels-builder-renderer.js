@@ -8,4 +8,14 @@ export class LevelsBuilderRenderer extends BgTableRenderer {
 
     initializeMediatorListeners() {
     }
+
+    get headerTemplate() {
+        return `<header class="header">
+                        <nav class="header__nav">
+                            <ul class="header__ul">
+                                <li class="header__li" id="saveNewLevelTemplate">Сохранить</li>
+                            </ul>
+                        </nav>
+                    </header>`;
+    }
 }

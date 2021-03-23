@@ -54,15 +54,19 @@ export class BgTableRenderer {
         }).join('')
     }
 
-    getHtml() {
-        return `<div class="main">
-                    <header class="header">
+    get headerTemplate() {
+        return `<header class="header">
                         <nav class="header__nav">
                             <ul class="header__ul">
                                 <li class="header__li" id="startNewGameBtnId">Начать заново</li>
                             </ul>
                         </nav>
-                    </header>
+                    </header>`;
+    }
+
+    getHtml() {
+        return `<div class="main">
+                    ${this.headerTemplate}
         
                 <section class="game">
                     <table class="game__table">
