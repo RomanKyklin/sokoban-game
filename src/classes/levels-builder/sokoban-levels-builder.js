@@ -98,8 +98,17 @@ export class SokobanLevelsBuilder {
         );
     }
 
+    deleteLevel() {
+        const isLevelInCash = localStorage.getItem(this.levelsBuilderManager.currentLevelIndex);
+
+        if (isLevelInCash) {
+            localStorage.removeItem(this.levelsBuilderManager.currentLevelIndex);
+        }
+    }
+
     initializeMediatorSubscriptions() {
         this.mediator.subscribe(GAME_ENGINE_ACTIONS.levels_builder_save, () => this.saveLevel());
+        this.mediator.subscribe(GAME_ENGINE_ACTIONS.levels_builder_delete, () => this.deleteLevel());
     }
 
     run() {

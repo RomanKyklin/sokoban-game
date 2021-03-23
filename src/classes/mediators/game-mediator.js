@@ -7,7 +7,8 @@ export const GAME_ENGINE_ACTIONS = {
     to_the_next_level: 'to_the_next_level',
     rerender_game: 'rerender_game',
     rerender_builder: 'rerender_builder',
-    levels_builder_save: 'levels_builder_save'
+    levels_builder_save: 'levels_builder_save',
+    levels_builder_delete: 'levels_builder_delete'
 }
 
 export class GameMediator {
