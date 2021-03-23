@@ -30,6 +30,15 @@
 
 .header__ul {
     list-style-type: none;
+    display: flex;
+}
+
+.header__ul li {
+    margin-right: 10px;
+}
+
+.header__ul li:last-child {
+    margin-right: 0;
 }
 
 .header__li {
