@@ -11,9 +11,12 @@ export class ThemeBuilder {
 
     get themeHtml() {
         return `
-            <ul class="theme-builder-ul">
-                ${this.themes.map(theme => `<li class="theme-builder-li">${theme}</li>`)}
-            </ul>
+            <div class="builder-theme">
+                <div class="builder-theme-title">Theme builder</div>
+                <ul class="theme-builder-ul">
+                    ${this.themes.map(theme => `<li class="theme-builder-li">${theme}</li>`)}
+                </ul>
+            </div>
         `
     }
 
