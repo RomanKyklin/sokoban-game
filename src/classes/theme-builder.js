@@ -1,4 +1,15 @@
 export class ThemeBuilder {
-    constructor() {
+    constructor(themeBuilderSelector) {
+        this.themeBuilderSelector = themeBuilderSelector;
+    }
+
+    themes = [
+        'red',
+        'blue',
+        'dark'
+    ];
+
+    renderThemeMenu() {
+
     }
 }
