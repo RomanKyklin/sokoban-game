@@ -96,3 +96,11 @@
 .saturate {
     filter: saturate(5);
 }
+
+.theme-builder-menu {
+    text-align: center;
+}
+
+.builder-theme-title, .theme-builder-li {
+    cursor: pointer;
+}
