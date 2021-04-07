@@ -1,1 +1,1 @@
-# sokoban-game
+# sokoban-game MVP implemented with native js
